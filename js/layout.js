@@ -100,7 +100,22 @@
   // "2 adults, 1 child" with the right plural forms
   const who = (trip) => [t("who.adults", { count: trip.adults }), trip.children ? t("who.children", { count: trip.children }) : ""].filter(Boolean).join(", ");
 
-  /* ---------- photos (js/photos.js, added later) ---------- */
+  /* ---------- logo (inline, takes the theme colours; js/logo.js) ---------- */
+  function logoSvg() {
+    return svgEl("svg", { viewBox: `0 0 ${LOGO.width} ${LOGO.height}`, class: "logo-svg", "aria-hidden": "true", focusable: "false" },
+      svgEl("path", { d: LOGO.o, class: "logo-o", "fill-rule": "evenodd" }), svgEl("path", { d: LOGO.word, class: "logo-word" }));
+  }
+  // "Photo: Author, CC BY-SA 4.0, Wikimedia Commons" with links
+  function credit(p, cls = "photo-credit") {
+    const cr = p && p.credit;
+    if (!cr) return "";
+    return el("p", { class: cls }, t("photo.credit") + " ",
+      el("a", { href: cr.page, rel: "noopener", target: "_blank", text: cr.author }),
+      cr.license ? ", " : "", cr.license ? (cr.licenseUrl ? el("a", { href: cr.licenseUrl, rel: "noopener license", target: "_blank", text: cr.license }) : cr.license) : "",
+      ", Wikimedia Commons");
+  }
+
+  /* ---------- photos (js/photos.js) ---------- */
   function photo(c, opts = {}) {
     const list = (window.PHOTOS && PHOTOS[c.id]) || [];
     const p = list[opts.index || 0];
@@ -142,19 +157,29 @@
     if (c.id === "tashkent") return t("city.isStart");
     return t("city.fromTashkent", { time: hours(st.hours), by: st.modes.map((m) => t("mode." + m)).join(" + ") });
   }
-  function cityCard(c) {
+  /* A place, editorial style: the photo carries it, the facts sit below in
+     the number font. opts.size: "wide" or "tall" picks the crop in a gallery. */
+  function cityCard(c, opts = {}) {
     const st = Calc.cityStats(c, new Date().getMonth() + 1);
-    return el("article", { class: "city-card", "data-city": c.id },
-      el("div", { class: "card-photo" }, photo(c, { sizes: "(min-width: 960px) 30vw, (min-width: 640px) 45vw, 100vw" })),
-      el("div", { class: "card-body" },
-        el("p", { class: "card-region", text: t("region." + c.region) }),
-        el("h3", { class: "card-title" }, el("a", { href: "destination.html?id=" + c.id, text: c.name[lang()] })),
-        el("p", { class: "card-about", text: c.about[lang()] }),
-        el("ul", { class: "card-facts" },
-          el("li", null, icon("clock", 16), el("span", { text: wayLine(c) })),
-          el("li", null, icon("calendar", 16), el("span", { text: t("city.best", { months: monthRange(c.best) }) })),
-          el("li", null, icon("users", 16), el("span", { text: t("city.perDay", { sum: moneyShort(st.perDay) }) }))),
-        el("div", { class: "card-actions" }, saveButton(c))));
+    const wide = opts.size === "wide";
+    return el("article", { class: "place" + (opts.size ? " place-" + opts.size : ""), "data-city": c.id },
+      el("div", { class: "place-photo" },
+        photo(c, { sizes: wide ? "(min-width: 960px) 60vw, 100vw" : "(min-width: 960px) 30vw, (min-width: 640px) 45vw, 100vw" }),
+        saveButton(c)),
+      el("div", { class: "place-text" },
+        el("p", { class: "place-meta", text: t("region." + c.region) }),
+        el("h3", { class: "place-name" }, el("a", { href: "destination.html?id=" + c.id, text: c.name[lang()] })),
+        el("p", { class: "place-about", text: c.about[lang()] }),
+        el("ul", { class: "place-facts" },
+          el("li", null, icon("clock", 15), el("span", { text: wayLine(c) })),
+          el("li", null, icon("calendar", 15), el("span", { text: t("city.best", { months: monthRange(c.best) }) })),
+          el("li", null, icon("users", 15), el("span", { text: t("city.perDay", { sum: moneyShort(st.perDay) }) })))));
+  }
+  // the ORAYVA route line: cities as stations on one cobalt line
+  function routeLine(ids, cls = "") {
+    const list = ids.filter((c, k, a) => c && c !== a[k - 1]);
+    return el("ol", { class: "route-line " + cls, "aria-label": t("tour.routeLabel") },
+      list.map((id) => el("li", null, el("span", { class: "route-dot", "aria-hidden": "true" }), el("span", { class: "route-name", text: cityName(id) }))));
   }
   // [4, 5, 9, 10] → "Apr–May, Sep–Oct"
   function monthRange(list) {
@@ -165,17 +190,19 @@
     if (runs.length > 1 && runs[0][0] === 1 && runs[runs.length - 1][1] === 12) { const last = runs.pop(); runs[0] = [last[0], runs[0][1]]; }
     return runs.map(([a, b]) => (a === b ? t("monthS." + a) : `${t("monthS." + a)}–${t("monthS." + b)}`)).join(", ");
   }
+  // a tour as one row: length, name, the route line, one line, the price
   function tourCard(tr) {
     const trip = Calc.tourTrip(tr, { month: new Date().getMonth() + 1 });
     const p = Calc.plan(trip);
-    return el("article", { class: "tour-card", "data-tour": tr.id },
-      el("div", { class: "card-body" },
-        el("p", { class: "card-region", text: t("tour.length", { days: p.dayCount, nights: p.nights, count: p.dayCount }) }),
-        el("h3", { class: "card-title" }, el("a", { href: "planner.html?tour=" + tr.id, text: tr.name[lang()] })),
-        el("p", { class: "tour-route", text: [trip.start, ...trip.stops.map((s) => s.city)].filter((c, i, a) => c !== a[i - 1]).map(cityName).join(" → ") }),
-        el("p", { class: "card-about", text: tr.about[lang()] }),
-        el("p", { class: "tour-price" }, el("span", { class: "label", text: t("tour.from") }), " ", el("strong", { class: "price", text: moneyShort(p.price.perPerson) }), " ", el("span", { class: "hint", text: t("tour.perPerson") })),
-        el("a", { class: "btn btn-ghost btn-small", href: "planner.html?tour=" + tr.id }, icon("route", 16), el("span", { text: t("tour.open") }))));
+    return el("article", { class: "tour-row", "data-tour": tr.id },
+      el("p", { class: "tour-length num", text: t("tour.length", { days: p.dayCount, nights: p.nights, count: p.dayCount }) }),
+      el("div", { class: "tour-main" },
+        el("h3", { class: "tour-name" }, el("a", { href: "planner.html?tour=" + tr.id, text: tr.name[lang()] })),
+        routeLine([trip.start, ...trip.stops.map((s) => s.city), trip.ret]),
+        el("p", { class: "tour-about", text: tr.about[lang()] })),
+      el("div", { class: "tour-side" },
+        el("p", { class: "tour-price" }, el("span", { class: "tour-from", text: t("tour.from") }), el("strong", { class: "num", text: moneyShort(p.price.perPerson) }), el("span", { class: "tour-per", text: t("tour.perPerson") })),
+        el("a", { class: "link-arrow", href: "planner.html?tour=" + tr.id }, el("span", { text: t("tour.open") }), icon("arrow", 16))));
   }
 
   /* ---------- small form helpers ---------- */
@@ -211,8 +238,8 @@
     const end = Calc.addDays(b.trip.date, b.days); // all-day events end the day after
     const esc = (s) => String(s).replace(/[\\,;]/g, (m) => "\\" + m).replace(/\n/g, "\\n");
     const stamp = new Date(b.created || Date.now()).toISOString().replace(/[-:]/g, "").slice(0, 15) + "Z";
-    const text = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Travel demo//EN", "BEGIN:VEVENT",
-      `UID:${b.code}@travel.demo`, `DTSTAMP:${stamp}`, `DTSTART;VALUE=DATE:${b.trip.date.replace(/-/g, "")}`, `DTEND;VALUE=DATE:${end.replace(/-/g, "")}`,
+    const text = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//ORAYVA demo//EN", "BEGIN:VEVENT",
+      `UID:${b.code}@orayva.demo`, `DTSTAMP:${stamp}`, `DTSTART;VALUE=DATE:${b.trip.date.replace(/-/g, "")}`, `DTEND;VALUE=DATE:${end.replace(/-/g, "")}`,
       `SUMMARY:${esc(t("book.icsTitle", { route: b.trip.stops.map((s) => cityName(s.city)).join(" – ") }))}`,
       `DESCRIPTION:${esc(t("book.icsText", { code: b.code }))}`, "END:VEVENT", "END:VCALENDAR"].join("\r\n");
     return el("a", { class: "btn btn-ghost btn-small", download: `trip-${b.code}.ics`, href: "data:text/calendar;charset=utf-8," + encodeURIComponent(text) },
@@ -237,9 +264,9 @@
       [["uzs", "UZS"], ["usd", "USD"]].map(([code, text]) => el("button", { type: "button", "data-currency": code, text, onclick: () => Store.setCurrency(code) })));
     const theme = el("button", { type: "button", id: "themeToggle", class: "icon-btn" }, el("span", { class: "i-sun" }, icon("sun", 20)), el("span", { class: "i-moon" }, icon("moon", 20)));
     host.append(el("div", { class: "container header-bar" },
-      el("a", { class: "brand", href: "index.html" }, el("span", { class: "brand-word", "data-i18n": "brand.name" }), el("span", { class: "visually-hidden", "data-i18n": "brand.home" })),
+      el("a", { class: "brand", href: "index.html" }, logoSvg(), el("span", { class: "visually-hidden", "data-i18n": "brand.home" })),
       nav,
-      el("div", { class: "header-tools" }, cur, langs, theme)));
+      el("div", { class: "header-tools" }, cur, langs, theme, page === "planner" ? null : el("a", { class: "btn btn-small header-plan", href: "planner.html", "data-i18n": "nav.plan" }))));
   }
   function renderBadges() {
     document.querySelectorAll("[data-currency]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.currency === Store.currency())));
@@ -253,7 +280,7 @@
     const host = $("site-footer");
     if (!host) return;
     host.replaceChildren(el("div", { class: "container footer-inner" },
-      el("div", { class: "footer-brand" }, el("p", { class: "brand-word", text: t("brand.name") }), el("p", { text: t("footer.about") })),
+      el("div", { class: "footer-brand" }, logoSvg(), el("p", { text: t("footer.about") })),
       el("div", { class: "footer-col" }, el("h2", { text: t("footer.plan") }),
         el("ul", null, [["destinations", "destinations.html"], ["planner", "planner.html"], ["trips", "trips.html"]].map(([k, href]) => el("li", null, el("a", { href, text: t("page." + k) }))))),
       el("div", { class: "footer-col" }, el("h2", { text: t("footer.offices") }),
@@ -276,5 +303,5 @@
     Core.init();
   }
 
-  window.Site = { el, svgEl, $, icon, num, money, moneyShort, hours, cityName, monthName, monthRange, dateText, todayIso, who, photo, saveButton, cityCard, tourCard, wayLine, modeIcon, choice, stepper, switchField, icsLink, setTitle, start, lang };
+  window.Site = { el, svgEl, $, icon, logoSvg, credit, routeLine, num, money, moneyShort, hours, cityName, monthName, monthRange, dateText, todayIso, who, photo, saveButton, cityCard, tourCard, wayLine, modeIcon, choice, stepper, switchField, icsLink, setTitle, start, lang };
 })();

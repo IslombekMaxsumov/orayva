@@ -1,4 +1,4 @@
-# Sayohat: trips around Uzbekistan (working name)
+# ORAYVA: trips around Uzbekistan
 
 Site #8 of my 10-websites course project: a travel agency for trips around Uzbekistan, in Uzbek, Russian and English, with prices in so'm or US dollars. Plain HTML, CSS and JavaScript: no framework, no build step, no backend. Everything you save stays in your browser.
 
@@ -23,15 +23,22 @@ The rule for this site: the tools must do real work, not just "click this, click
 ## Data
 12 destinations with 3–4 sights each, 26 transport links and 10 tours in `js/data.js`. **Travel times are close to the real ones; prices are approximate demo figures.**
 
-## Not done yet
-- **The look:** the layout is final, but the colours and fonts are a neutral placeholder until the design brief (`../travel-design-prompt.md`).
-- **Photos:** places show a plain plate with the region and name for now.
+## Design (ORAYVA brief, 2026-11-23)
+- **"Cobalt & Pomegranate":** warm paper #F3F0E7, deep cobalt-ink text #172E46, pomegranate #B94743 for the main actions and key moments, cobalt #287C91 for routes and data, warm gold used sparingly. Dark mode is its own blue-charcoal palette (#151E28 / #202D3A / #2B3946) with coral #E27669. A few brief values were deepened for small text (WCAG AA); the originals are noted in `css/base.css`.
+- **Type:** Manrope for headings, Inter for text, IBM Plex Mono for prices, times and numbers.
+- **Logo:** the ORAYVA wordmark (Manrope ExtraBold, open tracking) with a custom O whose counter is a pointed arch, like a madrasa portal seen straight on (`tools/logo.cjs` → `assets/brand`, `js/logo.js`). The arch O alone is the favicon.
+- **Hero:** a magazine spread. On desktop the headline sits in a cobalt-ink column and the photograph of the Kalta Minor in Khiva bleeds to the right edge, so nothing covers the minaret; on phones the photo is on top and the words below it. The trip starter rises over the bottom of the hero.
+- **Signature, the route line:** cities as stations on one cobalt line, with pomegranate start and end stops, on tour rows, the planner list of places and the day-by-day timeline.
+- **Layout:** open and editorial. A magazine spread for "good this month", a gallery with a wide feature every six places, tours as rows, numbered sights, three ways to get there side by side, numbered sections in the planner. Surfaces only for the trip starter, the planner total and the booking summary.
+
+## Photos
+28 photos from Wikimedia Commons (1 to 3 per place, plus the hero), picked by eye for one look: one clear landmark, daylight and a blue sky where possible. All CC0, CC BY, CC BY-SA or public domain; the author and licence are shown with each photo. `node tools/commons.mjs` downloads and resizes them (Windows PowerShell) and writes `js/photos.js`. The paintings of the Savitsky Museum were left out because they may still be in copyright.
 
 ## Tests
 `node --test tests/calc.test.mjs`: 13 tests for routes, car prices, the day-by-day plan, seasons, hotel classes, discounts, the address, search and the form checks.
 
 ## Files
-- `js/data.js` places, links, prices and tours; `js/calc.js` all the maths; `js/store.js` saved data; `js/layout.js` header, footer, cards and form parts; `js/pages/*.js` one file per page; `js/lang.js` UZ / RU / EN text; `js/core.js` language, theme, storage, toasts.
+- `js/logo.js` and `js/photos.js` are written by the tools; `js/data.js` places, links, prices and tours; `js/calc.js` all the maths; `js/store.js` saved data; `js/layout.js` header, footer, cards and form parts; `js/pages/*.js` one file per page; `js/lang.js` UZ / RU / EN text; `js/core.js` language, theme, storage, toasts.
 - `tools/pages.mjs` writes the 6 HTML pages from one template.
 
 The Russian and Uzbek text should be checked by a native speaker.

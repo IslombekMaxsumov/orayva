@@ -20,9 +20,12 @@
   function list() {
     const found = Calc.sortCities(Calc.filterCities(f), f.sort, Site.lang());
     $("count").textContent = t("dest.count", { count: found.length });
-    $("list").replaceChildren(...found.map(Site.cityCard));
+    $("list").replaceChildren(...found.map((c, i) => Site.cityCard(c, { size: i % 6 === 0 ? "wide" : "" })));
     $("empty").hidden = found.length > 0;
     $("reset").hidden = Calc.toQuery(f) === "";
+    // the phone filter button says how many filters are on
+    const on = ["region", "type", "month", "maxHours"].filter((k) => f[k]).length;
+    $("filtersToggle").textContent = on ? t("filter.toggleN", { count: on }) : t("filter.toggle");
   }
   function update(change) {
     f = { ...f, ...change };
@@ -38,6 +41,11 @@
   $("maxHours").addEventListener("change", (e) => update({ maxHours: Number(e.target.value) }));
   $("sort").addEventListener("change", (e) => update({ sort: e.target.value }));
   $("filters").addEventListener("submit", (e) => e.preventDefault());
+  $("filtersToggle").addEventListener("click", () => {
+    const open = $("filtersToggle").getAttribute("aria-expanded") !== "true";
+    $("filtersToggle").setAttribute("aria-expanded", String(open));
+    $("filters").classList.toggle("is-open", open);
+  });
   $("reset").addEventListener("click", reset);
   $("reset2").addEventListener("click", reset);
 

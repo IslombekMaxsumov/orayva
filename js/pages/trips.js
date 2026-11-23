@@ -46,7 +46,7 @@
     }));
   }
   function cards(ids, key) {
-    return ids.length ? el("div", { class: "card-grid" }, ids.map((id) => Site.cityCard(DATA.city(id)))) : empty(key, "destinations.html", "page.destinations");
+    return ids.length ? el("div", { class: "place-strip" }, ids.map((id) => Site.cityCard(DATA.city(id), { size: "small" }))) : empty(key, "destinations.html", "page.destinations");
   }
 
   function render() {

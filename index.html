@@ -3,9 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sayohat</title>
+  <title>ORAYVA</title>
   <meta name="description" content="">
-  <meta name="theme-color" content="#f6f5f1">
+  <meta name="theme-color" content="#f3f0e7">
+  <link rel="icon" href="assets/brand/orayva-favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400..600&family=Manrope:wght@500..800&display=swap">
   <!-- Apply the saved theme before the page is drawn, so it never flashes. -->
   <script>
     window.APP_NS = "travel";
@@ -21,6 +25,7 @@
   <script defer src="js/data.js"></script>
   <script defer src="js/calc.js"></script>
   <script defer src="js/store.js"></script>
+  <script defer src="js/logo.js"></script>
   <script defer src="js/photos.js"></script>
   <script defer src="js/layout.js"></script>
   <script defer src="js/pages/home.js"></script>
@@ -29,33 +34,36 @@
   <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
   <header id="site-header" class="site-header"></header>
 
-  <main id="main" tabindex="-1" class="container page home-page">
+  <main id="main" tabindex="-1" class="home-page">
     <section class="hero" aria-labelledby="homeTitle">
-      <div class="hero-text">
-        <p class="eyebrow" data-i18n="home.eyebrow"></p>
-        <h1 id="homeTitle" data-i18n="home.title"></h1>
-        <p class="lead" data-i18n="home.intro"></p>
+      <div class="hero-photo" id="heroPhoto"></div>
+      <div class="hero-inner container">
+        <p class="hero-label"><span class="hero-place" id="heroPlace"></span><span class="hero-coords num" id="heroCoords"></span></p>
+        <h1 id="homeTitle" class="hero-title" data-i18n="home.title"></h1>
+        <p class="hero-lead" data-i18n="home.intro"></p>
+        <div class="hero-cta"><a class="btn" href="planner.html" data-i18n="home.ctaPlan"></a><a class="link-arrow link-light" href="destinations.html"><span data-i18n="home.ctaExplore"></span><svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
       </div>
-      <form id="quickPlan" class="quick-plan" novalidate aria-labelledby="qpTitle">
-        <h2 id="qpTitle" data-i18n="home.qpTitle"></h2>
-        <fieldset class="choice"><legend data-i18n="home.qpWhere"></legend><div id="qpCities" class="chip-row"></div></fieldset>
-        <div class="qp-row">
-          <div class="field"><label for="qpMonth" data-i18n="home.qpMonth"></label><select id="qpMonth" class="select"></select></div>
-          <div class="field"><label for="qpPeople" data-i18n="home.qpPeople"></label><select id="qpPeople" class="select"></select></div>
-        </div>
-        <p id="qpSummary" class="hint" aria-live="polite"></p>
-        <p id="qpError" class="field-error" role="alert"></p>
-        <button type="submit" class="btn" data-i18n="home.qpGo"></button>
+      <a class="hero-scroll" href="#start"><span data-i18n="home.scroll"></span><span class="hero-scroll-line" aria-hidden="true"></span></a>
+      <p class="hero-credit" id="heroCredit"></p>
+    </section>
+    <div class="container">
+    <section id="start" class="starter" aria-labelledby="qpTitle">
+      <form id="quickPlan" class="quick-plan" novalidate>
+        <h2 id="qpTitle" class="starter-title" data-i18n="home.qpTitle"></h2>
+        <fieldset class="choice qp-where"><legend data-i18n="home.qpWhere"></legend><div id="qpCities" class="chip-row"></div></fieldset>
+        <div class="field qp-month"><label for="qpMonth" data-i18n="home.qpMonth"></label><select id="qpMonth" class="select"></select></div>
+        <div class="field qp-people"><label for="qpPeople" data-i18n="home.qpPeople"></label><select id="qpPeople" class="select"></select></div>
+        <div class="qp-go"><p id="qpSummary" class="qp-summary num" aria-live="polite"></p><p id="qpError" class="field-error" role="alert"></p><button type="submit" class="btn" data-i18n="home.qpGo"></button></div>
       </form>
     </section>
     <section class="section" aria-labelledby="seasonTitle">
       <div class="section-head"><h2 id="seasonTitle"></h2><a class="more-link" id="seasonMore" href="destinations.html" data-i18n="home.seasonAll"></a></div>
-      <div id="seasonList" class="card-grid"></div>
+      <div id="seasonList" class="spread"></div>
     </section>
     <section class="section" aria-labelledby="toursTitle">
       <h2 id="toursTitle" data-i18n="home.toursTitle"></h2>
       <p class="lead" data-i18n="home.toursIntro"></p>
-      <div id="tourList" class="tour-grid"></div>
+      <div id="tourList" class="tour-list"></div>
     </section>
     <section class="section" aria-labelledby="howTitle">
       <h2 id="howTitle" data-i18n="home.howTitle"></h2>
@@ -63,8 +71,9 @@
     </section>
     <section class="section" id="recentSection" aria-labelledby="recentTitle" hidden>
       <h2 id="recentTitle" data-i18n="home.recent"></h2>
-      <div id="recentList" class="card-grid"></div>
+      <div id="recentList" class="place-strip"></div>
     </section>
+    </div>
   </main>
   <footer id="site-footer" class="site-footer"></footer>
   <div id="toasts" class="toast-host" aria-live="polite"></div>

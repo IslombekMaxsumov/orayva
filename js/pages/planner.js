@@ -43,7 +43,9 @@
   function form() {
     const L = Site.lang();
     const lastCity = trip.stops.length ? trip.stops[trip.stops.length - 1].city : null;
+    const sec = (n, key) => el("h3", { class: "plan-sec" }, el("span", { class: "plan-sec-n num", "aria-hidden": "true", text: "0" + n }), el("span", { text: t(key) }));
     const fields = [
+      sec(1, "plan.sec1"),
       el("div", { class: "field" }, el("label", { for: "tour", text: t("plan.fromTour") }),
         el("select", { id: "tour", class: "select", onchange: (e) => { if (!e.target.value) return; const tr = DATA.tour(e.target.value); set({ ...Calc.tourTrip(tr, { month: trip.month, date: trip.date, adults: trip.adults, children: trip.children }) }); Core.toast(t("plan.tourLoaded", { name: tr.name[L] })); focusLater("#tour"); } },
           opts([["", t("plan.chooseTour")], ...DATA.TOURS.map((tr) => [tr.id, tr.name[L]])], ""))),
@@ -59,6 +61,7 @@
             Core.toast(t("plan.addedStop", { name: Site.cityName(id) }));
             focusLater("#addBtn");
           } }, icon("plus", 18), el("span", { text: t("plan.add") })))),
+      sec(2, "plan.sec2"),
       el("div", { class: "field-row" },
         el("div", { class: "field" }, el("label", { for: "start", text: t("plan.start") }),
           el("select", { id: "start", class: "select", onchange: (e) => set({ start: e.target.value }, false) }, opts(DATA.START_CITIES.map((id) => [id, Site.cityName(id)]), trip.start))),
@@ -67,12 +70,14 @@
       el("div", { class: "field-row" },
         Site.stepper({ id: "adults", label: t("plan.adults"), value: trip.adults, min: 1, max: 10, onChange: (v) => { const back = stepFocus("adults"); set({ adults: v }); focusLater(back, "#adults"); } }),
         Site.stepper({ id: "children", label: t("plan.children"), value: trip.children, min: 0, max: 6, hint: t("plan.childrenHint"), onChange: (v) => { const back = stepFocus("children"); set({ children: v }); focusLater(back, "#children"); } })),
+      sec(3, "plan.sec3"),
       el("div", { class: "field-row" },
         el("div", { class: "field" }, el("label", { for: "date", text: t("plan.date") }),
           el("input", { id: "date", type: "date", class: "input", value: trip.date, min: Calc.addDays(Site.todayIso(), 3), max: Calc.addDays(Site.todayIso(), 365), onchange: (e) => set({ date: e.target.value }, false) }),
           el("p", { class: "hint", text: t("plan.dateHint") })),
         el("div", { class: "field" }, el("label", { for: "month", text: t("plan.month") }),
           el("select", { id: "month", class: "select", disabled: !!trip.date, onchange: (e) => set({ month: Number(e.target.value) }, false) }, opts(Array.from({ length: 12 }, (_, i) => [i + 1, Site.monthName(i + 1)]), trip.month)))),
+      sec(4, "plan.sec4"),
       Site.choice({ name: "hotel", legend: t("plan.hotel"), value: trip.hotel, options: DATA.CLASSES.map((c) => [c, t("hotel." + c)]), onChange: (v) => set({ hotel: v }, false) }),
       Site.choice({ name: "pref", legend: t("plan.pref"), value: trip.pref, options: ["fastest", "cheapest", "comfort"].map((p) => [p, t("pref." + p)]), onChange: (v) => set({ pref: v }, false) }),
       Site.switchField({ id: "guide", label: t("plan.guide"), checked: trip.guide, hint: t("plan.guideHint"), onChange: (v) => set({ guide: v }, false) }),

@@ -1,40 +1,61 @@
 /* ==========================================================
-   Travel site base: tokens, reset, type, buttons, form fields, chips,
+   ORAYVA base: tokens, reset, type, buttons, form fields, chips,
    sliders, switches, badges, tables, toast (components from site #7).
    ========================================================== */
 
-/* PLACEHOLDER LOOK: plain neutral greys and system fonts, only so the pages
-   are usable while the logic is built. The real palette, fonts and shapes
-   come from the design brief (do not style before it arrives). */
+/* ORAYVA: "Cobalt & Pomegranate" (design brief, 2026-11-23). Pomegranate is
+   the strong moment (main actions, the logo O, key numbers), cobalt the
+   contrast (route lines, links in data), warm gold used sparingly.
+   A few brief values are too light for small text (WCAG AA 4.5:1, 3:1 for
+   field borders): text uses a slightly deeper shade, noted next to it. */
 :root,
 :root[data-theme="light"] {
   color-scheme: light;
-  --bg: #f6f5f1; --surface: #ffffff; --raised: #ebe9e3; --elevated: #ffffff;
-  --ink: #1f2124; --ink-2: #5c5f66; --ink-3: #a3a5aa;
-  --line: #dcdad4; --line-strong: #8a8c90;
-  --accent: #3d5a80; --accent-text: #3d5a80; --btn: #3d5a80; --btn-hover: #2f4767; --on-btn: #ffffff;
-  --soft: #e7ecf3; --ok: #2f7a4f; --warn: #94601f; --danger: #b2433e;
-  --chart: #3d5a80; --meter: #2f7a4f; --plate: #e4e2dc;
+  --bg: #f3f0e7; --surface: #ffffff; --raised: #e9e6dc; --elevated: #ffffff;
+  --ink: #172e46;
+  --ink-2: #5c6770;          /* brief #65717A is 4.4:1 on the background */
+  --ink-3: #a5aaa9;          /* decoration only */
+  --line: #dadbd5;
+  --line-strong: #7e827f;    /* field borders: 3.4:1 */
+  --accent: #b94743;         /* pomegranate */
+  --accent-text: #983b38;    /* pomegranate as small text: 5.6:1 even on the raised surface */
+  --btn: #b94743; --btn-hover: #983b38; --on-btn: #ffffff;
+  --cobalt: #287c91;
+  --cobalt-text: #236f82;    /* brief #287C91 is 4.2:1 as text */
+  --gold: #e5b96b;
+  --soft: #f4e3df;           /* a pomegranate wash */
+  --cobalt-soft: #dcebee;
+  --ok: #2e7650; --warn: #8a5a12; --danger: #a3312c;
+  --chart: #287c91; --meter: #2e7650; --plate: #e2ded2;
   --field: #ffffff; --band: #ffffff;
-  --toast-bg: #1f2124; --toast-ink: #f6f5f1; --toast-action: #b9c9e0; --focus: #1f2124;
+  --toast-bg: #172e46; --toast-ink: #f3f0e7; --toast-action: #e5b96b; --focus: #172e46;
+  --scrim: 23, 46, 70;       /* hero shade, as r, g, b */
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #16181c; --surface: #1e2025; --raised: #282a30; --elevated: #30333a;
-  --ink: #eeedea; --ink-2: #a9abb0; --ink-3: #6f7278;
-  --line: #34373d; --line-strong: #75787e;
-  --accent: #8fb0d9; --accent-text: #9fbce0; --btn: #8fb0d9; --btn-hover: #a7c2e3; --on-btn: #16181c;
-  --soft: #263040; --ok: #7cbf94; --warn: #d6a764; --danger: #e08a84;
-  --chart: #8fb0d9; --meter: #7cbf94; --plate: #1e2025;
-  --field: #1e2025; --band: #1e2025;
-  --toast-bg: #30333a; --toast-ink: #eeedea; --toast-action: #a7c2e3; --focus: #eeedea;
+  --bg: #151e28; --surface: #202d3a; --raised: #2b3946; --elevated: #2b3946;
+  --ink: #f1efe8; --ink-2: #b0bac2; --ink-3: #5d6b78;
+  --line: #3a4855;
+  --line-strong: #75828d;    /* field borders: 3.6:1 (brief #3A4855 is 1.8:1) */
+  --accent: #e27669;
+  --accent-text: #f18a7c;    /* 4.9:1 even on the raised surface */
+  --btn: #e27669; --btn-hover: #f18a7c; --on-btn: #151e28;
+  --cobalt: #54a5b4; --cobalt-text: #6db6c4;
+  --gold: #ddbb78;
+  --soft: #3a2a2e; --cobalt-soft: #1c3542;
+  --ok: #7cc29a; --warn: #ddbb78; --danger: #f08a80;
+  --chart: #54a5b4; --meter: #7cc29a; --plate: #202d3a;
+  --field: #202d3a; --band: #202d3a;
+  --toast-bg: #2b3946; --toast-ink: #f1efe8; --toast-action: #ddbb78; --focus: #f1efe8;
+  --scrim: 10, 16, 24;
 }
 
 :root {
-  --font-head: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --r-ctl: 8px;              /* ordinary controls: 6–10px */
-  --r-panel: 12px;           /* larger panels */
+  --font-head: "Manrope", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-num: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --r-ctl: 4px;              /* controls: crisp, editorial corners */
+  --r-panel: 6px;            /* the few surfaces and photos */
   --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 20px; --s6: 24px; --s8: 32px; --s10: 40px; --s12: 48px; --s16: 64px;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   --fast: 160ms;
@@ -55,7 +76,7 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
-h1, h2, h3, p, figure, dl, dd { margin: 0; }
+h1, h2, h3, h4, p, figure, dl, dd { margin: 0; }
 h1, h2, h3 { font-family: var(--font-head); font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; }
 button, input, select, textarea { font: inherit; color: inherit; }
 button { cursor: pointer; }

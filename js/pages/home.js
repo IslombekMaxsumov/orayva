@@ -36,18 +36,35 @@
     const m = new Date().getMonth() + 1;
     $("seasonTitle").textContent = t("home.seasonTitle", { month: Site.monthName(m) });
     $("seasonMore").href = "destinations.html?month=" + m;
-    const good = Calc.sortCities(DATA.CITIES.filter((c) => c.best.includes(m)), "popular").slice(0, 3);
-    $("seasonList").replaceChildren(...(good.length ? good : Calc.sortCities(DATA.CITIES, "popular").slice(0, 3)).map(Site.cityCard));
+    // the best places for this month first, topped up to three with places that are fine then (not too hot or snowy)
+    const good = Calc.sortCities(DATA.CITIES.filter((c) => c.best.includes(m)), "popular");
+    const fine = Calc.sortCities(DATA.CITIES.filter((c) => !good.includes(c) && !c.heat.includes(m) && !c.snow.includes(m)), "popular");
+    $("seasonList").replaceChildren(...[...good, ...fine].slice(0, 3).map((c, i) => Site.cityCard(c, { size: i === 0 ? "wide" : "" })));
+  }
+
+  // the hero: one photograph, its place and coordinates, and the credit
+  function hero() {
+    const H = window.HERO;
+    if (!H) return;
+    const L = Site.lang();
+    $("heroPhoto").replaceChildren(el("img", {
+      src: (H.sizes.find((s) => s[0] >= 1600) || H.sizes[H.sizes.length - 1])[1],
+      srcset: H.sizes.map(([w, f]) => `${f} ${w}w`).join(", "), sizes: "100vw",
+      alt: H.alt[L], fetchpriority: "high", decoding: "async", style: H.pos ? `object-position: ${H.pos}` : null }));
+    $("heroPlace").textContent = H.place[L];
+    $("heroCoords").textContent = H.coords;
+    $("heroCredit").replaceChildren(Site.credit(H, "hero-credit-text"));
   }
 
   function render() {
+    hero();
     quickPlan();
     season();
     $("tourList").replaceChildren(...DATA.TOURS.slice(0, 6).map(Site.tourCard));
-    $("howList").replaceChildren(...[1, 2, 3].map((n) => el("li", null, el("strong", { text: t(`home.how${n}`) }), el("span", { text: t(`home.how${n}Text`) }))));
+    $("howList").replaceChildren(...[1, 2, 3].map((n) => el("li", null, el("span", { class: "how-n num", "aria-hidden": "true", text: "0" + n }), el("strong", { text: t(`home.how${n}`) }), el("span", { class: "how-text", text: t(`home.how${n}Text`) }))));
     const recent = Store.recent().map(DATA.city);
     $("recentSection").hidden = recent.length === 0;
-    $("recentList").replaceChildren(...recent.slice(0, 3).map(Site.cityCard));
+    $("recentList").replaceChildren(...recent.slice(0, 4).map((c) => Site.cityCard(c, { size: "small" })));
   }
 
   $("qpMonth").addEventListener("change", (e) => { state.month = Number(e.target.value); summary(); });

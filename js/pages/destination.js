@@ -39,8 +39,16 @@
     });
     return el("ul", { class: "way-list" }, rows.map(({ pref, r, dup }) => el("li", { class: "way" },
       el("p", { class: "way-title" }, el("strong", { text: t("pref." + pref) }), dup ? el("span", { class: "hint", text: " " + t("dest.sameWay") }) : null),
-      el("p", { class: "way-legs" }, r.legs.map((l, i) => [i ? " → " : "", icon(Site.modeIcon[l.mode], 16), " ", t("dest.leg", { mode: t("mode." + l.mode), to: Site.cityName(l.to), time: Site.hours(l.hours) })])),
-      el("p", { class: "way-total" }, t("dest.wayTotal", { time: Site.hours(r.hours), sum: Site.money(r.price / 2) })))));
+      el("ol", { class: "way-legs" }, r.legs.map((l) => el("li", null, icon(Site.modeIcon[l.mode], 16), el("span", { text: t("dest.leg", { mode: t("mode." + l.mode), to: Site.cityName(l.to), time: Site.hours(l.hours) }) })))),
+      el("p", { class: "way-total num" }, t("dest.wayTotal", { time: Site.hours(r.hours), sum: Site.money(r.price / 2) })))));
+  }
+
+  // the other photos of the place, side by side, each with its credit
+  function morePhotos() {
+    const list = ((window.PHOTOS && PHOTOS[c.id]) || []).slice(1);
+    if (!list.length) return "";
+    return el("div", { class: "dest-more dest-more-" + list.length }, list.map((p, i) =>
+      el("div", { class: "dest-more-item" }, Site.photo(c, { index: i + 1, sizes: "(min-width: 900px) 50vw, 100vw" }), Site.credit(p))));
   }
 
   function render() {
@@ -54,35 +62,36 @@
     const st = Calc.cityStats(c, new Date().getMonth() + 1);
     const tours = DATA.TOURS.filter((tr) => tr.stops.some(([id]) => id === c.id));
     view.replaceChildren(
-      el("div", { class: "dest-top" },
-        el("div", { class: "dest-gallery" }, Site.photo(c, { eager: true, cls: "dest-photo", sizes: "(min-width: 960px) 640px, 100vw" })),
+      el("div", { class: "dest-hero" },
+        el("div", { class: "dest-figure" }, Site.photo(c, { eager: true, cls: "dest-photo", sizes: "(min-width: 1240px) 1240px, 100vw" }), Site.credit((window.PHOTOS && PHOTOS[c.id] || [])[0])),
         el("div", { class: "dest-head" },
-          el("p", { class: "eyebrow", text: t("region." + c.region) }),
+          el("p", { class: "eyebrow" }, el("span", { text: t("region." + c.region) }), el("span", { class: "dest-types", text: c.types.map((x) => t("type." + x)).join(" · ") })),
           el("h1", { text: c.name[L] }),
-          el("p", { class: "lead", text: c.about[L] }),
-          el("ul", { class: "badges" }, c.types.map((x) => el("li", { class: "badge", text: t("type." + x) }))),
-          el("dl", { class: "fact-list" },
+          el("p", { class: "dest-lead", text: c.about[L] }))),
+      el("div", { class: "dest-facts-row" },
+          el("dl", { class: "dest-facts" },
             el("div", null, el("dt", { text: t("dest.fromTashkent") }), el("dd", { text: c.id === "tashkent" ? t("city.isStart") : `${Site.hours(st.hours)} · ${st.modes.map((m) => t("mode." + m)).join(" + ")}` })),
             el("div", null, el("dt", { text: t("dest.stay") }), el("dd", { text: t("dest.nights", { count: c.minNights }) })),
             el("div", null, el("dt", { text: t("dest.perDay") }), el("dd", { text: Site.money(st.perDay) })),
             el("div", null, el("dt", { text: t("dest.hotels") }), el("dd", { text: t("hotel." + (c.maxClass === "yurt" ? "yurt" : c.maxClass + "Max")) }))),
-          el("p", { class: "hint", text: t("dest.perDayNote") }),
           el("div", { class: "dest-actions" },
             el("button", { type: "button", class: "btn", id: "addTrip", onclick: () => {
               Store.addToDraft(c.id);
               Core.toast(t("dest.added", { name: c.name[L] }), { label: t("dest.openPlanner"), onClick: () => { location.href = "planner.html"; } });
             } }, icon("plus", 18), el("span", { text: t("dest.addTrip") })),
-            Site.saveButton(c, true)))),
+            Site.saveButton(c, true)),
+          el("p", { class: "hint dest-note", text: t("dest.perDayNote") })),
+      morePhotos(),
       el("section", { class: "section", "aria-labelledby": "whenTitle" },
         el("h2", { id: "whenTitle", text: t("dest.when") }), seasonStrip(),
         el("ul", { class: "season-key" }, ["best", "ok", "heat", "snow"].filter((k) => k === "best" || k === "ok" || c[k].length).map((k) => el("li", { class: "season-" + k }, el("span", { class: "dot", "aria-hidden": "true" }), t("season." + k))))),
       el("section", { class: "section", "aria-labelledby": "sightTitle" },
         el("h2", { id: "sightTitle", text: t("dest.sights", { count: c.sights.length }) }),
-        el("ol", { class: "sight-list" }, c.sights.map((s) => el("li", null, el("h3", { text: s.name[L] }), el("p", { text: s.text[L] }))))),
+        el("ol", { class: "sight-list" }, c.sights.map((s, i) => el("li", null, el("span", { class: "sight-n num", "aria-hidden": "true", text: String(i + 1).padStart(2, "0") }), el("h3", { text: s.name[L] }), el("p", { text: s.text[L] }))))),
       el("section", { class: "section", "aria-labelledby": "wayTitle" },
         el("h2", { id: "wayTitle", text: t("dest.ways") }), el("p", { class: "hint", text: t("dest.waysNote") }), ways()),
       tours.length ? el("section", { class: "section", "aria-labelledby": "tourTitle" },
-        el("h2", { id: "tourTitle", text: t("dest.tours") }), el("div", { class: "tour-grid" }, tours.map(Site.tourCard))) : "");
+        el("h2", { id: "tourTitle", text: t("dest.tours") }), el("div", { class: "tour-list" }, tours.map(Site.tourCard))) : "");
   }
 
   Site.start(render, { title: () => (c ? c.name[Site.lang()] : t("dest.notFound")), onChange: () => {

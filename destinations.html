@@ -3,9 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sayohat</title>
+  <title>ORAYVA</title>
   <meta name="description" content="">
-  <meta name="theme-color" content="#f6f5f1">
+  <meta name="theme-color" content="#f3f0e7">
+  <link rel="icon" href="assets/brand/orayva-favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400..600&family=Manrope:wght@500..800&display=swap">
   <!-- Apply the saved theme before the page is drawn, so it never flashes. -->
   <script>
     window.APP_NS = "travel";
@@ -21,6 +25,7 @@
   <script defer src="js/data.js"></script>
   <script defer src="js/calc.js"></script>
   <script defer src="js/store.js"></script>
+  <script defer src="js/logo.js"></script>
   <script defer src="js/photos.js"></script>
   <script defer src="js/layout.js"></script>
   <script defer src="js/pages/destinations.js"></script>
@@ -35,14 +40,17 @@
     <form id="filters" class="dest-filters" novalidate role="search" aria-labelledby="filterTitle">
       <h2 id="filterTitle" class="visually-hidden" data-i18n="filter.title"></h2>
       <div class="field filter-search"><label for="q" data-i18n="filter.search"></label><input id="q" class="input" type="search" autocomplete="off" maxlength="60" data-i18n-placeholder="filter.searchPlaceholder"></div>
+      <button type="button" id="filtersToggle" class="btn btn-ghost filters-toggle" aria-expanded="false" aria-controls="filterMore"></button>
+      <div id="filterMore" class="filter-more">
       <div class="field"><label for="region" data-i18n="filter.region"></label><select id="region" class="select"></select></div>
       <div class="field"><label for="month" data-i18n="filter.month"></label><select id="month" class="select"></select></div>
       <div class="field"><label for="maxHours" data-i18n="filter.maxHours"></label><select id="maxHours" class="select"></select></div>
       <div class="field"><label for="sort" data-i18n="filter.sort"></label><select id="sort" class="select"></select></div>
       <fieldset class="choice filter-types"><legend data-i18n="filter.type"></legend><div id="typeChips" class="chip-row"></div></fieldset>
+      </div>
     </form>
     <div class="result-bar"><p id="count" class="result-count" aria-live="polite"></p><button type="button" id="reset" class="btn btn-ghost btn-small" data-i18n="filter.reset"></button></div>
-    <div id="list" class="card-grid"></div>
+    <div id="list" class="gallery"></div>
     <div id="empty" class="empty" hidden>
       <h2 data-i18n="filter.emptyTitle"></h2>
       <p data-i18n="filter.emptyText"></p>
