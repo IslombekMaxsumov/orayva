@@ -14,7 +14,7 @@
 body { padding-bottom: var(--tabbar-h); font-size: 0.9375rem; line-height: 1.55; }
 .container { width: min(100% - 2 * var(--gutter), var(--wide)); }
 .num, .price { font-family: var(--font-num); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
-h1, h2, h3 { letter-spacing: -0.02em; }
+h1, h2, h3 { letter-spacing: -0.02em; overflow-wrap: break-word; hyphens: auto; } /* long Russian words (e.g. "достопримечательности") must not push the page sideways on small phones */
 .skip-link { position: absolute; left: 8px; top: -60px; z-index: 70; padding: 10px 14px; background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--r-ctl); }
 .skip-link:focus { top: 8px; }
 .page { padding-block: var(--s8) var(--s12); }
@@ -525,3 +525,21 @@ textarea.input { resize: vertical; min-height: 88px; }
 .saved-plan h3 a { color: var(--ink); }
 /* the hero's second action keeps the hero text colour (the turquoise link rule must not reach it) */
 .hero .link-light, .hero .link-light:hover { color: var(--hero-ink); }
+
+/* ---------- focus rings that show on every surface ---------- */
+.input:focus-visible, .select:focus-visible { outline: 2px solid var(--lapis); outline-offset: 1px; border-color: var(--lapis); }
+.hero :focus-visible { outline-color: var(--hero-ink); }
+.plan-summary :focus-visible { outline-color: var(--total-ink); }
+
+/* the narrowest phones (320–379px): a tighter header so logo, currency,
+   language and theme all fit inside the gutters */
+@media (max-width: 379px) {
+  .header-bar { gap: 4px; }
+  .header-tools { gap: 4px; }
+  .logo-svg { height: 15px; }
+  .seg { padding: 1px; }
+  .seg button { padding: 5px 4px; font-size: 0.625rem; letter-spacing: 0.02em; }
+  .header-tools .icon-btn { width: 34px; height: 34px; }
+  /* 12 month cells are too narrow for Russian labels here: two rows of six */
+  .season-strip { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+}
