@@ -3,51 +3,57 @@
    sliders, switches, badges, tables, toast (components from site #7).
    ========================================================== */
 
-/* ORAYVA: "Cobalt & Pomegranate" (design brief, 2026-11-23). Pomegranate is
-   the strong moment (main actions, the logo O, key numbers), cobalt the
-   contrast (route lines, links in data), warm gold used sparingly.
-   A few brief values are too light for small text (WCAG AA 4.5:1, 3:1 for
-   field borders): text uses a slightly deeper shade, noted next to it. */
+/* ORAYVA: "Electric Lapis" (colour brief, 2026-11-23; replaces Cobalt &
+   Pomegranate, which felt too beige and too close to Varaq and OLIVE).
+   Four families, each with one job:
+   - lapis: the identity (main actions, hero column, active nav, route line, planner total)
+   - turquoise: the second voice (metadata, route markers, itinerary details, footer)
+   - pomegranate: emphasis only (logo O, key labels, start/end and day markers)
+   - atlas amber: warmth and season (very hot months, small editorial marks)
+   Every text pair passes WCAG AA (checked with a script). One change from the
+   brief: on the turquoise footer the logo O and hover use amber, because
+   pomegranate on #006B66 is 1.09:1 and would disappear. */
 :root,
 :root[data-theme="light"] {
   color-scheme: light;
-  --bg: #f3f0e7; --surface: #ffffff; --raised: #e9e6dc; --elevated: #ffffff;
-  --ink: #172e46;
-  --ink-2: #5c6770;          /* brief #65717A is 4.4:1 on the background */
-  --ink-3: #a5aaa9;          /* decoration only */
-  --line: #dadbd5;
-  --line-strong: #7e827f;    /* field borders: 3.4:1 */
-  --accent: #b94743;         /* pomegranate */
-  --accent-text: #983b38;    /* pomegranate as small text: 5.6:1 even on the raised surface */
-  --btn: #b94743; --btn-hover: #983b38; --on-btn: #ffffff;
-  --cobalt: #287c91;
-  --cobalt-text: #236f82;    /* brief #287C91 is 4.2:1 as text */
-  --gold: #e5b96b;
-  --soft: #f4e3df;           /* a pomegranate wash */
-  --cobalt-soft: #dcebee;
-  --ok: #2e7650; --warn: #8a5a12; --danger: #a3312c;
-  --chart: #287c91; --meter: #2e7650; --plate: #e2ded2;
-  --field: #ffffff; --band: #ffffff;
-  --toast-bg: #172e46; --toast-ink: #f3f0e7; --toast-action: #e5b96b; --focus: #172e46;
-  --scrim: 23, 46, 70;       /* hero shade, as r, g, b */
+  --bg: #f3f5fc; --surface: #ffffff; --raised: #e6eaf5; --elevated: #ffffff; --sand: #f0e5d5;
+  --ink: #182044; --ink-2: #515b78; --ink-3: #9aa3bd;
+  --line: #c8cee0; --line-strong: #7e89a6;
+  --lapis: #263fc7; --lapis-hover: #1d32a8; --on-lapis: #ffffff; --lapis-soft: #dfe6ff; --on-lapis-2: #dfe6ff;
+  --turq: #006b66; --turq-hover: #00534f; --on-turq: #ffffff; --turq-soft: #d9f1ed;
+  --pom: #c21f4b; --pom-hover: #a51b3d; --on-pom: #ffffff; --pom-soft: #fbe3e8;
+  --amber: #f4c66a; --on-amber: #704600;
+  --ok: #146b45; --ok-soft: #e0f3e8; --warn: #795000; --warn-soft: #fff0d1; --danger: #b42342; --danger-soft: #fce4e9;
+  --m-best-bg: #dfe6ff; --m-best: #263fc7; --m-fine-bg: #d9f1ed; --m-fine: #006b66; --m-hot-bg: #fcebc8; --m-hot: #704600; --m-snow-bg: #e5eaf3; --m-snow: #40516b;
+  --hero-bg: #263fc7; --hero-ink: #ffffff; --hero-ink-2: #ffffff; --hero-cta: #ffffff; --hero-cta-ink: #263fc7; --hero-cta-hover: #dfe6ff;
+  --total-bg: #263fc7; --total-ink: #ffffff; --total-ink-2: #dfe6ff;
+  --foot-bg: #006b66; --foot-ink: #ffffff; --foot-ink-2: #e0f3f0; --foot-link: #ffffff; --foot-mark: #f4c66a; --foot-line: rgba(255, 255, 255, 0.28);
+  --field: #ffffff; --band: #ffffff; --plate: #e6eaf5;
+  --toast-bg: #182044; --toast-ink: #f3f5fc; --toast-action: #f4c66a; --focus: #182044;
+  --shadow-ink: 24, 32, 68;
+  /* the older names, mapped onto the new families */
+  --accent: var(--lapis); --accent-text: var(--lapis); --btn: var(--lapis); --btn-hover: var(--lapis-hover); --on-btn: var(--on-lapis);
+  --cobalt: var(--turq); --cobalt-text: var(--turq); --cobalt-soft: var(--turq-soft); --gold: var(--amber); --soft: var(--lapis-soft);
+  --chart: var(--lapis); --meter: var(--ok);
 }
+/* dark: deep aubergine-charcoal with violet surfaces and luminous accents */
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #151e28; --surface: #202d3a; --raised: #2b3946; --elevated: #2b3946;
-  --ink: #f1efe8; --ink-2: #b0bac2; --ink-3: #5d6b78;
-  --line: #3a4855;
-  --line-strong: #75828d;    /* field borders: 3.6:1 (brief #3A4855 is 1.8:1) */
-  --accent: #e27669;
-  --accent-text: #f18a7c;    /* 4.9:1 even on the raised surface */
-  --btn: #e27669; --btn-hover: #f18a7c; --on-btn: #151e28;
-  --cobalt: #54a5b4; --cobalt-text: #6db6c4;
-  --gold: #ddbb78;
-  --soft: #3a2a2e; --cobalt-soft: #1c3542;
-  --ok: #7cc29a; --warn: #ddbb78; --danger: #f08a80;
-  --chart: #54a5b4; --meter: #7cc29a; --plate: #202d3a;
-  --field: #202d3a; --band: #202d3a;
-  --toast-bg: #2b3946; --toast-ink: #f1efe8; --toast-action: #ddbb78; --focus: #f1efe8;
-  --scrim: 10, 16, 24;
+  --bg: #191720; --surface: #24222e; --raised: #332b43; --elevated: #332b43; --sand: #39302d;
+  --ink: #f6f1ff; --ink-2: #c3bbd3; --ink-3: #6c6180;
+  --line: #51465f; --line-strong: #8e829c;
+  --lapis: #9aaeff; --lapis-hover: #b2c1ff; --on-lapis: #151a3d; --lapis-soft: #30365c; --on-lapis-2: #30365c;
+  --turq: #65e0d0; --turq-hover: #85eadd; --on-turq: #102d2b; --turq-soft: #214744;
+  --pom: #ff7894; --pom-hover: #ff9aac; --on-pom: #35101d; --pom-soft: #4b2632;
+  --amber: #f4c66a; --on-amber: #392600;
+  --ok: #78dda9; --ok-soft: #214333; --warn: #ffd27a; --warn-soft: #4b3b22; --danger: #ff91a5; --danger-soft: #4b2632;
+  --m-best-bg: #30365c; --m-best: #c5d0ff; --m-fine-bg: #214744; --m-fine: #8de8da; --m-hot-bg: #4a3b25; --m-hot: #ffd98a; --m-snow-bg: #343b4c; --m-snow: #d2dcee;
+  --hero-bg: #30365c; --hero-ink: #f6f1ff; --hero-ink-2: #d8d2e6; --hero-cta: #9aaeff; --hero-cta-ink: #151a3d; --hero-cta-hover: #b2c1ff;
+  --total-bg: #9aaeff; --total-ink: #151a3d; --total-ink-2: #2a2f5c;
+  --foot-bg: #24222e; --foot-ink: #f6f1ff; --foot-ink-2: #c3bbd3; --foot-link: #65e0d0; --foot-mark: #ff7894; --foot-line: #214744;
+  --field: #24222e; --band: #24222e; --plate: #24222e;
+  --toast-bg: #332b43; --toast-ink: #f6f1ff; --toast-action: #f4c66a; --focus: #f6f1ff;
+  --shadow-ink: 0, 0, 0;
 }
 
 :root {
@@ -128,7 +134,7 @@ a:hover { color: var(--ink); }
 /* language switch */
 .seg { display: inline-flex; border: 1px solid var(--line); border-radius: var(--r-ctl); padding: 2px; }
 .seg button { border: 0; background: none; padding: 6px 9px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; color: var(--ink-2); }
-.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.seg button[aria-pressed="true"] { background: var(--lapis); color: var(--on-lapis); }
 
 /* ---------- form fields: 44–48px, clear labels ---------- */
 .field { display: grid; gap: 6px; min-width: 0; }
@@ -158,9 +164,9 @@ input[type="number"] { font-variant-numeric: tabular-nums; }
   transition: border-color var(--fast) var(--ease), background-color var(--fast) var(--ease);
 }
 .chip:hover { border-color: var(--line-strong); }
-.chip-radio:has(input:checked):hover { border-color: var(--ink); }
+.chip-radio:has(input:checked):hover { border-color: var(--lapis-hover); }
 .chip-radio input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
-.chip-radio:has(input:checked) { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.chip-radio:has(input:checked) { background: var(--lapis); border-color: var(--lapis); color: var(--on-lapis); }
 .chip-radio:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
 .chip.is-disabled { opacity: 0.4; cursor: not-allowed; }
 .chip-active { background: var(--soft); border-color: transparent; }
@@ -195,14 +201,14 @@ input[type="number"] { font-variant-numeric: tabular-nums; }
   content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%;
   background: var(--ink-2); transition: transform var(--fast) var(--ease), background-color var(--fast) var(--ease);
 }
-.switch input:checked { background: var(--ink); border-color: var(--ink); }
-.switch input:checked::after { transform: translateX(16px); background: var(--bg); }
+.switch input:checked { background: var(--lapis); border-color: var(--lapis); }
+.switch input:checked::after { transform: translateX(16px); background: var(--on-lapis); }
 .switch input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 
 /* ---------- badges ---------- */
 .badges { display: flex; flex-wrap: wrap; gap: 4px; }
 .badge { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.03em; background: var(--surface); color: var(--ink); }
-.badge-new { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.badge-new { background: var(--pom); color: var(--on-pom); border-color: var(--pom); }
 
 /* ---------- tables: horizontal separators ---------- */
 .table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }

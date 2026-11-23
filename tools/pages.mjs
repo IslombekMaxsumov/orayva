@@ -10,7 +10,7 @@ const head = (page) => `<!doctype html>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ORAYVA</title>
   <meta name="description" content="">
-  <meta name="theme-color" content="#f3f0e7">
+  <meta name="theme-color" content="#f3f5fc">
   <link rel="icon" href="assets/brand/orayva-favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

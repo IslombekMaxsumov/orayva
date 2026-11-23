@@ -43,15 +43,15 @@ for (const ch of "RAYVA") { const g = glyph(ch, x); word += g.d; x += g.width + 
 const width = Math.ceil(x - TRACK + 1);
 
 const svg = (ink, accent) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${BOX}" role="img" aria-label="ORAYVA"><path fill="${accent}" fill-rule="evenodd" d="${o.d}"/><path fill="${ink}" d="${word}"/></svg>\n`;
-fs.writeFileSync(ROOT + "assets/brand/orayva-logo.svg", svg("#172E46", "#B94743"));
-fs.writeFileSync(ROOT + "assets/brand/orayva-logo-dark.svg", svg("#F1EFE8", "#E27669"));
+fs.writeFileSync(ROOT + "assets/brand/orayva-logo.svg", svg("#182044", "#C21F4B"));
+fs.writeFileSync(ROOT + "assets/brand/orayva-logo-dark.svg", svg("#F6F1FF", "#FF7894"));
 fs.writeFileSync(ROOT + "assets/brand/orayva-logo-mono.svg", svg("#000000", "#000000"));
 // favicon: the arch O alone, in pomegranate on cream
 const pad = 4;
 const f = archO(pad);
 const S = f.width + pad * 2;
 const dy = S / 2 - (BASE - CAP / 2); // move the letter centre to the middle of the square
-fs.writeFileSync(ROOT + "assets/brand/orayva-favicon.svg", `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${r2(S)} ${r2(S)}"><rect width="${r2(S)}" height="${r2(S)}" rx="${r2(S * 0.22)}" fill="#F3F0E7"/><path transform="translate(0 ${r2(dy)})" fill="#B94743" fill-rule="evenodd" d="${f.d}"/></svg>
+fs.writeFileSync(ROOT + "assets/brand/orayva-favicon.svg", `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${r2(S)} ${r2(S)}"><rect width="${r2(S)}" height="${r2(S)}" rx="${r2(S * 0.22)}" fill="#F3F5FC"/><path transform="translate(0 ${r2(dy)})" fill="#C21F4B" fill-rule="evenodd" d="${f.d}"/></svg>
 `);
 fs.writeFileSync(ROOT + "js/logo.js", `/* ORAYVA wordmark outlines, written by tools/logo.cjs */\nwindow.LOGO = ${JSON.stringify({ width, height: BOX, o: o.d, word })};\n`);
 console.log("logo", width, "x", BOX);
