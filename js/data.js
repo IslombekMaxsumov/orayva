@@ -13,6 +13,7 @@
   const s = (id, en, ru, uz, ten, tru, tuz) => ({ id, name: { en, ru, uz }, text: { en: ten, ru: tru, uz: tuz } });
 
   /* ---------- destinations ----------
+     tip: one local tip, written as a friend would say it.
      best: good months (1–12). heat / snow: months with a climate warning.
      hotel: price factor for the city. maxClass: best hotel class there
      ("yurt" = a desert yurt camp, priced per person). fees: entrance fees
@@ -21,6 +22,7 @@
     { id: "tashkent", region: "tashkent", types: ["history", "food"], best: [3, 4, 5, 9, 10, 11], heat: [7, 8], snow: [], minNights: 1, hotel: 1.15, maxClass: "five", fees: 80000, airport: true, popular: 7,
       name: { en: "Tashkent", ru: "Ташкент", uz: "Toshkent" },
       about: { en: "The capital: wide avenues, the metro with its painted stations, and Chorsu bazaar under its green dome.", ru: "Столица: широкие проспекты, метро с расписными станциями и базар Чорсу под зелёным куполом.", uz: "Poytaxt: keng shohko'chalar, bezakli bekatlari bilan metro va yashil gumbazli Chorsu bozori." },
+      tip: { en: "Go to Chorsu early, before nine, while the bread is still warm and the sellers have time to talk.", ru: "Приходите на Чорсу пораньше, до девяти, пока лепёшки ещё тёплые, а у продавцов есть время поговорить.", uz: "Chorsuga ertaroq, soat to'qqizgacha boring: non hali issiq, sotuvchilarning esa gaplashishga vaqti bor." },
       sights: [
         s("hastimam", "Khast Imam complex", "Комплекс Хаст-Имам", "Hazrati Imom majmuasi", "Mosques and a library that keeps one of the oldest Qur'ans.", "Мечети и библиотека, где хранится один из древнейших Коранов.", "Masjidlar va eng qadimiy Qur'onlardan biri saqlanadigan kutubxona."),
         s("chorsu", "Chorsu Bazaar", "Базар Чорсу", "Chorsu bozori", "The old market under a green dome: spices, bread, dried fruit.", "Старый рынок под зелёным куполом: специи, лепёшки, сухофрукты.", "Yashil gumbaz ostidagi eski bozor: ziravorlar, non, quruq mevalar."),
@@ -30,6 +32,7 @@
     { id: "samarkand", region: "center", types: ["history", "crafts", "food"], best: [4, 5, 9, 10], heat: [6, 7, 8], snow: [], minNights: 2, hotel: 1.05, maxClass: "five", fees: 250000, airport: true, popular: 10,
       name: { en: "Samarkand", ru: "Самарканд", uz: "Samarqand" },
       about: { en: "Timur's capital: the Registan, blue domes and the street of mausoleums at Shah-i-Zinda.", ru: "Столица Тимура: Регистан, голубые купола и улица мавзолеев Шахи-Зинда.", uz: "Temur poytaxti: Registon, moviy gumbazlar va Shohi Zinda maqbaralar ko'chasi." },
+      tip: { en: "See the Registan twice: in the soft morning light, and again after dark when the lights come on.", ru: "Посмотрите Регистан дважды: в мягком утреннем свете и ещё раз вечером, когда включают подсветку.", uz: "Registonni ikki marta ko'ring: tongning mayin yorug'ida va kechqurun chiroqlar yonganda yana bir bor." },
       sights: [
         s("registan", "Registan", "Регистан", "Registon", "Three madrasas around one square; come back at night for the lights.", "Три медресе вокруг одной площади; вернитесь вечером, когда включают подсветку.", "Bir maydon atrofidagi uchta madrasa; kechqurun chiroqlar yonganda yana keling."),
         s("shahizinda", "Shah-i-Zinda", "Шахи-Зинда", "Shohi Zinda", "A narrow street of tiled tombs, every door a different blue.", "Узкая улица мавзолеев в изразцах, у каждой двери свой оттенок синего.", "Koshinli maqbaralarning tor ko'chasi, har bir eshik o'zgacha moviy."),
@@ -39,6 +42,7 @@
     { id: "bukhara", region: "center", types: ["history", "crafts", "food"], best: [4, 5, 9, 10], heat: [6, 7, 8], snow: [], minNights: 2, hotel: 1, maxClass: "five", fees: 200000, airport: true, popular: 9,
       name: { en: "Bukhara", ru: "Бухара", uz: "Buxoro" },
       about: { en: "A living old town of trading domes, madrasas and the pool at Lyabi-Hauz.", ru: "Живой старый город: торговые купола, медресе и хауз Ляби-Хауз.", uz: "Tirik eski shahar: savdo gumbazlari, madrasalar va Labi Hovuz." },
+      tip: { en: "Sit by Lyabi-Hauz in the evening with a pot of green tea: the old town is quietest when the day tours leave.", ru: "Вечером посидите у Ляби-Хауза с чайником зелёного чая: старый город затихает, когда уходят дневные экскурсии.", uz: "Kechqurun bir choynak ko'k choy bilan Labi Hovuz bo'yida o'tiring: kunduzgi ekskursiyalar ketgach, eski shahar tinchiydi." },
       sights: [
         s("kalon", "Poi Kalon", "Пои-Калян", "Poyi Kalon", "The Kalon minaret and mosque, standing since 1127.", "Минарет и мечеть Калян, стоящие с 1127 года.", "1127-yildan beri turgan Kalon minorasi va masjidi."),
         s("ark", "The Ark", "Крепость Арк", "Ark qal'asi", "The fortress of the emirs, with a museum inside.", "Крепость эмиров с музеем внутри.", "Amirlar qal'asi, ichida muzey."),
@@ -48,6 +52,7 @@
     { id: "khiva", region: "west", types: ["history", "crafts"], best: [4, 5, 9, 10], heat: [6, 7, 8], snow: [], minNights: 1, hotel: 0.95, maxClass: "four", fees: 250000, airport: true, popular: 8,
       name: { en: "Khiva", ru: "Хива", uz: "Xiva" },
       about: { en: "A walled town inside the Itchan Kala, best at sunset from the city walls.", ru: "Город за стенами Ичан-Калы; лучше всего на закате с городской стены.", uz: "Ichan Qal'a devorlari ichidagi shahar; quyosh botayotganda devor ustidan eng go'zal." },
+      tip: { en: "Climb the west wall by Ota Darvaza an hour before sunset, when the minarets turn gold.", ru: "Поднимитесь на западную стену у Ата-Дарвазы за час до заката, когда минареты становятся золотыми.", uz: "Quyosh botishidan bir soat oldin Ota Darvoza yonidagi g'arbiy devorga chiqing: minoralar oltin rangga kiradi." },
       sights: [
         s("itchan", "Itchan Kala", "Ичан-Кала", "Ichan Qal'a", "The inner town: one ticket for most museums and madrasas.", "Внутренний город: один билет на большинство музеев и медресе.", "Ichki shahar: ko'pchilik muzey va madrasalar uchun bitta chipta."),
         s("kaltaminor", "Kalta Minor", "Кальта-Минор", "Kalta Minor", "The short, wide minaret covered in turquoise tiles.", "Невысокий широкий минарет в бирюзовых изразцах.", "Feruza koshinli past va yo'g'on minora."),
@@ -57,6 +62,7 @@
     { id: "fergana", region: "east", types: ["crafts", "food", "nature"], best: [4, 5, 6, 9, 10], heat: [7, 8], snow: [], minNights: 2, hotel: 0.8, maxClass: "four", fees: 60000, airport: true, popular: 6,
       name: { en: "Fergana Valley", ru: "Ферганская долина", uz: "Farg'ona vodiysi" },
       about: { en: "Green, fertile and full of workshops: silk in Margilan, ceramics in Rishtan, the khan's palace in Kokand.", ru: "Зелёная плодородная долина мастеров: шёлк в Маргилане, керамика в Риштане, дворец хана в Коканде.", uz: "Yam-yashil, serhosil va hunarmandlar vodiysi: Marg'ilonda ipak, Rishtonda kulolchilik, Qo'qonda xon saroyi." },
+      tip: { en: "In Margilan, ask to try the loom: the weavers at Yodgorlik like showing how atlas is made.", ru: "В Маргилане попросите попробовать станок: ткачихи «Ёдгорлика» с удовольствием покажут, как делают атлас.", uz: "Marg'ilonda dastgohda to'qib ko'rishni so'rang: «Yodgorlik» to'quvchilari atlas qanday tayyorlanishini mamnuniyat bilan ko'rsatadi." },
       sights: [
         s("yodgorlik", "Yodgorlik silk factory", "Шёлковая фабрика «Ёдгорлик»", "«Yodgorlik» ipak fabrikasi", "Watch atlas silk being dyed and woven by hand in Margilan.", "В Маргилане атлас красят и ткут вручную у вас на глазах.", "Marg'ilonda atlasning qo'lda bo'yalishi va to'qilishini ko'ring."),
         s("rishtan", "Rishtan ceramics", "Риштанская керамика", "Rishton kulolchiligi", "Blue-glazed bowls and plates from family workshops.", "Пиалы и ляганы с синей глазурью из семейных мастерских.", "Oilaviy ustaxonalardan moviy sirli kosa va laganlar."),
@@ -66,6 +72,7 @@
     { id: "nukus", region: "west", types: ["history", "desert"], best: [4, 5, 9, 10], heat: [6, 7, 8], snow: [], minNights: 1, hotel: 0.8, maxClass: "three", fees: 120000, airport: true, popular: 4,
       name: { en: "Nukus", ru: "Нукус", uz: "Nukus" },
       about: { en: "The capital of Karakalpakstan, home of the Savitsky Museum of banned Soviet avant-garde art.", ru: "Столица Каракалпакстана, где находится музей Савицкого с запрещённым советским авангардом.", uz: "Qoraqalpog'iston poytaxti, taqiqlangan sovet avangardi saqlanadigan Savitskiy muzeyi shu yerda." },
+      tip: { en: "Give the Savitsky Museum at least half a day, and check its opening hours before you fly.", ru: "Отведите музею Савицкого хотя бы полдня и проверьте часы работы перед вылетом.", uz: "Savitskiy muzeyiga kamida yarim kun ajrating va uchishdan oldin ish vaqtini tekshiring." },
       sights: [
         s("savitsky", "Savitsky Museum", "Музей Савицкого", "Savitskiy muzeyi", "Thousands of paintings saved from the censors in the desert.", "Тысячи картин, спасённых от цензуры в пустыне.", "Senzuradan cho'lda asrab qolingan minglab rasmlar."),
         s("mizdakhan", "Mizdakhan", "Миздахкан", "Mizdahkon", "An ancient hilltop cemetery and a ruined fortress.", "Древний некрополь на холме и руины крепости.", "Tepalikdagi qadimiy qabriston va qal'a xarobalari."),
@@ -74,6 +81,7 @@
     { id: "muynak", region: "west", types: ["desert", "nature"], best: [4, 5, 9, 10], heat: [6, 7, 8], snow: [12, 1, 2], minNights: 1, hotel: 0.7, maxClass: "guest", fees: 50000, airport: false, popular: 3,
       name: { en: "Muynak and the Aral Sea", ru: "Муйнак и Аральское море", uz: "Mo'ynoq va Orol dengizi" },
       about: { en: "A former fishing port where rusting ships now lie in the desert, a long way from the shrinking sea.", ru: "Бывший рыбацкий порт: ржавые корабли лежат в пустыне, далеко от отступившего моря.", uz: "Sobiq baliqchilar porti: zanglagan kemalar endi dengizdan ancha uzoqda, cho'lda yotibdi." },
+      tip: { en: "Bring a scarf and plenty of water: the old seabed is windy, and there is little shade among the ships.", ru: "Возьмите платок и побольше воды: на старом дне моря ветрено, а тени среди кораблей почти нет.", uz: "Ro'mol va ko'proq suv oling: eski dengiz tubida shamol ko'p, kemalar orasida esa soya deyarli yo'q." },
       sights: [
         s("ships", "Ship cemetery", "Кладбище кораблей", "Kemalar qabristoni", "Old fishing boats on the dry seabed below the former shore.", "Старые рыболовецкие суда на высохшем дне ниже бывшего берега.", "Sobiq qirg'oq ostidagi qurigan tubda eski baliqchi kemalari."),
         s("aralmuseum", "Aral Sea Museum", "Музей Аральского моря", "Orol dengizi muzeyi", "Paintings and photos of Muynak when it was still by the water.", "Картины и фото Муйнака, когда он ещё стоял у воды.", "Mo'ynoq hali suv bo'yida bo'lgan paytdagi rasm va suratlar."),
@@ -82,6 +90,7 @@
     { id: "chimgan", region: "tashkent", types: ["mountains", "nature"], best: [1, 2, 5, 6, 7, 8, 9], heat: [], snow: [12, 1, 2], minNights: 1, hotel: 1, maxClass: "five", fees: 100000, airport: false, popular: 6,
       name: { en: "Chimgan and Charvak", ru: "Чимган и Чарвак", uz: "Chimyon va Chorvoq" },
       about: { en: "Mountains 85 km from Tashkent: skiing in winter, hiking and the turquoise Charvak lake in summer.", ru: "Горы в 85 км от Ташкента: зимой лыжи, летом походы и бирюзовое Чарвакское водохранилище.", uz: "Toshkentdan 85 km uzoqlikdagi tog'lar: qishda chang'i, yozda sayr va feruza rangli Chorvoq suv ombori." },
+      tip: { en: "Come on a weekday if you can: at weekends half of Tashkent drives up to the mountains.", ru: "По возможности приезжайте в будни: в выходные в горы едет пол-Ташкента.", uz: "Iloji bo'lsa, ish kunida keling: dam olish kunlari Toshkentning yarmi tog'ga chiqadi." },
       sights: [
         s("amirsoy", "Amirsoy resort", "Курорт Амирсой", "Amirsoy kurorti", "Cable cars up to the slopes, open all year.", "Канатные дороги на склоны, работают круглый год.", "Yonbag'irlarga osma yo'llar, yil bo'yi ishlaydi."),
         s("charvak", "Charvak lake", "Чарвакское водохранилище", "Chorvoq suv ombori", "Swimming and boat rides on a mountain lake in summer.", "Летом купание и прогулки на лодке по горному озеру.", "Yozda tog' ko'lida cho'milish va qayiqda sayr."),
@@ -90,6 +99,7 @@
     { id: "nurata", region: "center", types: ["desert", "nature", "history"], best: [4, 5, 9, 10], heat: [6, 7, 8], snow: [12, 1, 2], minNights: 1, hotel: 1, maxClass: "yurt", fees: 40000, airport: false, popular: 5,
       name: { en: "Nurata and Aydarkul", ru: "Нурата и Айдаркуль", uz: "Nurota va Aydarko'l" },
       about: { en: "A night in a yurt camp in the Kyzylkum desert, a camel ride and a swim in Aydarkul lake.", ru: "Ночь в юртовом лагере в пустыне Кызылкум, прогулка на верблюде и купание в озере Айдаркуль.", uz: "Qizilqum cho'lidagi o'tov lagerida tunash, tuyada sayr va Aydarko'lda cho'milish." },
+      tip: { en: "Ask the camp to wake you before sunrise: the dunes are cool and completely silent then.", ru: "Попросите в лагере разбудить вас до рассвета: в это время барханы прохладные и совсем тихие.", uz: "Lagerdagilardan sizni tong otmasdan uyg'otishni so'rang: bu paytda barxanlar salqin va jimjit bo'ladi." },
       sights: [
         s("yurts", "Yurt camp", "Юртовый лагерь", "O'tov lageri", "Dinner by the fire and a sky full of stars.", "Ужин у костра и небо, полное звёзд.", "Gulxan yonida kechki ovqat va yulduzlarga to'la osmon."),
         s("camel", "Camel ride", "Прогулка на верблюде", "Tuyada sayr", "An hour across the dunes at sunset.", "Час по барханам на закате.", "Quyosh botishida barxanlar bo'ylab bir soat."),
@@ -99,6 +109,7 @@
     { id: "shahrisabz", region: "center", types: ["history"], best: [4, 5, 9, 10], heat: [6, 7, 8], snow: [], minNights: 1, hotel: 0.8, maxClass: "three", fees: 60000, airport: false, popular: 4,
       name: { en: "Shahrisabz", ru: "Шахрисабз", uz: "Shahrisabz" },
       about: { en: "Timur's home town over the mountain pass from Samarkand, with the giant gate of the Ak-Saray.", ru: "Родной город Тимура за перевалом от Самарканда, с огромным порталом Ак-Сарая.", uz: "Samarqanddan dovon ortidagi Temurning ona shahri, Oqsaroyning ulkan peshtoqi bilan." },
+      tip: { en: "Stop at the Takhtakaracha pass on the way from Samarkand for the view and a cup of tea.", ru: "По дороге из Самарканда остановитесь на перевале Тахтакарача ради вида и чашки чая.", uz: "Samarqanddan kelayotganda manzara va bir piyola choy uchun Taxtaqoracha dovonida to'xtang." },
       sights: [
         s("aksaray", "Ak-Saray Palace", "Дворец Ак-Сарай", "Oqsaroy", "The remains of a 65-metre palace gate.", "Остатки 65-метрового портала дворца.", "65 metrli saroy peshtoqining qoldiqlari."),
         s("dorut", "Dorut Tilovat", "Дорут-Тиловат", "Dor ut-Tilovat", "Mosque and tombs of Timur's family.", "Мечеть и усыпальницы семьи Тимура.", "Masjid va Temur oilasining maqbaralari."),
@@ -107,6 +118,7 @@
     { id: "zaamin", region: "center", types: ["mountains", "nature"], best: [5, 6, 7, 8, 9], heat: [], snow: [12, 1, 2], minNights: 1, hotel: 0.8, maxClass: "three", fees: 50000, airport: false, popular: 3,
       name: { en: "Zaamin National Park", ru: "Зааминский национальный парк", uz: "Zomin milliy bog'i" },
       about: { en: "Juniper forests and cool air in the Turkestan range, a summer escape from the heat.", ru: "Арчовые леса и прохладный воздух Туркестанского хребта — летнее спасение от жары.", uz: "Turkiston tizmasidagi archazorlar va salqin havo — yozgi issiqdan qochish uchun." },
+      tip: { en: "Pack a warm layer even in July: nights in the juniper forest are cool.", ru: "Возьмите тёплую кофту даже в июле: ночи в арчовом лесу прохладные.", uz: "Hatto iyulda ham issiq kiyim oling: archazordagi tunlar salqin bo'ladi." },
       sights: [
         s("juniper", "Juniper forest trails", "Тропы в арчовом лесу", "Archazor so'qmoqlari", "Easy walks among 700-year-old junipers.", "Лёгкие прогулки среди 700-летних арчей.", "700 yillik archalar orasida yengil sayr."),
         s("suffa", "Suffa plateau", "Плато Суффа", "Suffa platosi", "A high plateau with a giant Soviet radio telescope.", "Высокое плато с гигантским советским радиотелескопом.", "Ulkan sovet radioteleskopi joylashgan baland plato."),
@@ -115,6 +127,7 @@
     { id: "termez", region: "south", types: ["history"], best: [3, 4, 10, 11], heat: [5, 6, 7, 8, 9], snow: [], minNights: 2, hotel: 0.85, maxClass: "four", fees: 80000, airport: true, popular: 3,
       name: { en: "Termez", ru: "Термез", uz: "Termiz" },
       about: { en: "The far south on the Amu Darya: Buddhist monasteries from the Kushan era and the hottest summers in the country.", ru: "Крайний юг на Амударье: буддийские монастыри кушанской эпохи и самое жаркое лето в стране.", uz: "Amudaryo bo'yidagi janub: Kushon davri buddaviy ibodatxonalari va mamlakatdagi eng issiq yoz." },
+      tip: { en: "Start early: by noon the ruins are hot and have almost no shade, even in spring.", ru: "Выезжайте пораньше: к полудню на руинах жарко и почти нет тени, даже весной.", uz: "Ertaroq yo'lga chiqing: tushga borib xarobalar qiziydi va soya deyarli bo'lmaydi, hatto bahorda ham." },
       sights: [
         s("fayaztepa", "Fayaz Tepa", "Фаяз-Тепа", "Fayoztepa", "Ruins of a Buddhist monastery with a restored stupa.", "Руины буддийского монастыря с восстановленной ступой.", "Qayta tiklangan stupali buddaviy ibodatxona xarobalari."),
         s("hakim", "Al-Hakim at-Termizi", "Мавзолей ат-Термизи", "Al-Hakim at-Termiziy", "The complex of the city's best-known scholar.", "Комплекс самого известного учёного города.", "Shaharning eng mashhur allomasining majmuasi."),

@@ -18,15 +18,15 @@ window.PHOTOS = {
     ]
    ],
    "credit": {
-    "author": "Bgag",
-    "license": "CC0",
-    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "page": "https://commons.wikimedia.org/wiki/File:Hazrati_Imam_Mosque_01.jpg"
+    "author": "ElenaLitera",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:%D0%A3%D0%B7%D0%B1%D0%B5%D0%BA%D0%B8%D1%81%D1%82%D0%B0%D0%BD,_%D0%A2%D0%B0%D1%88%D0%BA%D0%B5%D0%BD%D1%82,_%D1%80%D1%8B%D0%BD%D0%BE%D0%BA_%D0%A7%D0%BE%D1%80%D1%81%D1%83,_%D0%BB%D0%B5%D0%BF%D1%91%D1%88%D0%B5%D1%87%D0%BD%D1%8B%D0%B9_%D1%86%D0%B5%D1%85_(12).jpg"
    },
    "alt": {
-    "en": "The carved entrance of the Hazrati Imam mosque in Tashkent, between two turquoise domes",
-    "ru": "Резной портал мечети Хазрати Имам в Ташкенте между двумя бирюзовыми куполами",
-    "uz": "Toshkentdagi Hazrati Imom masjidining ikki feruza gumbaz orasidagi o'ymakor peshtoqi"
+    "en": "Bakers taking bread out of the tandoor ovens at Chorsu bazaar in Tashkent",
+    "ru": "Пекари достают лепёшки из тандыров на базаре Чорсу в Ташкенте",
+    "uz": "Toshkentdagi Chorsu bozorida novvoylar tandirdan non uzmoqda"
    },
    "pos": "50% 45%"
   },
@@ -46,16 +46,17 @@ window.PHOTOS = {
     ]
    ],
    "credit": {
-    "author": "Elya",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "page": "https://commons.wikimedia.org/wiki/File:Tashkent_metro_drushbanarod.jpg"
+    "author": "Bgag",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:Hazrati_Imam_Mosque_01.jpg"
    },
    "alt": {
-    "en": "A Tashkent metro station with a pale blue train at the platform",
-    "ru": "Станция ташкентского метро с голубым поездом у платформы",
-    "uz": "Platformada havorang poyezd turgan Toshkent metrosi bekati"
-   }
+    "en": "The carved entrance of the Hazrati Imam mosque in Tashkent, between two turquoise domes",
+    "ru": "Резной портал мечети Хазрати Имам в Ташкенте между двумя бирюзовыми куполами",
+    "uz": "Toshkentdagi Hazrati Imom masjidining ikki feruza gumbaz orasidagi o'ymakor peshtoqi"
+   },
+   "pos": "50% 45%"
   }
  ],
  "samarkand": [
@@ -327,6 +328,34 @@ window.PHOTOS = {
     ]
    ],
    "credit": {
+    "author": "Enric",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:026_F%C3%A0brica_de_seda_Yodgorlik,_Imom_Zahiriddin_Ko%27chasi_138_(Marguilan),_teixint_al_teler.jpg"
+   },
+   "alt": {
+    "en": "A weaver at her loom making atlas silk at the Yodgorlik factory in Margilan",
+    "ru": "Ткачиха за станком ткёт атлас на фабрике «Ёдгорлик» в Маргилане",
+    "uz": "Marg'ilondagi «Yodgorlik» fabrikasida dastgoh ortida atlas to'qiyotgan to'quvchi"
+   },
+   "pos": "50% 40%"
+  },
+  {
+   "sizes": [
+    [
+     640,
+     "assets/photos/fergana-2-640.jpg"
+    ],
+    [
+     1024,
+     "assets/photos/fergana-2-1024.jpg"
+    ],
+    [
+     1600,
+     "assets/photos/fergana-2-1600.jpg"
+    ]
+   ],
+   "credit": {
     "author": "Peretz Partensky from San Francisco, USA",
     "license": "CC BY 2.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
@@ -342,15 +371,15 @@ window.PHOTOS = {
    "sizes": [
     [
      640,
-     "assets/photos/fergana-2-640.jpg"
+     "assets/photos/fergana-3-640.jpg"
     ],
     [
      1024,
-     "assets/photos/fergana-2-1024.jpg"
+     "assets/photos/fergana-3-1024.jpg"
     ],
     [
      1600,
-     "assets/photos/fergana-2-1600.jpg"
+     "assets/photos/fergana-3-1600.jpg"
     ]
    ],
    "credit": {

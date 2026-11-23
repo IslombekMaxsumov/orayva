@@ -111,7 +111,7 @@ textarea.input { resize: vertical; min-height: 88px; }
 .place:hover .place-name a { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; text-decoration-color: var(--lapis); }
 .place:hover .photo img { transform: scale(1.035); }
 .place-about { color: var(--ink-2); max-width: 52ch; }
-.place-facts { display: grid; gap: 4px; margin-top: 2px; font-family: var(--font-num); font-size: 0.78rem; color: var(--ink-2); }
+.place-facts { display: grid; gap: 4px; margin-top: 2px; font-family: var(--font-body); font-size: 0.78rem; color: var(--ink-2); }
 .place-facts li { display: flex; gap: 8px; align-items: flex-start; }
 .place-facts li:first-child { color: var(--turq); }
 .place-facts li:nth-child(2) { justify-self: start; padding: 1px 6px 1px 4px; margin-left: -4px; border-radius: 3px; background: var(--turq-soft); color: var(--ink); }
@@ -234,7 +234,7 @@ textarea.input { resize: vertical; min-height: 88px; }
   .filter-more, .dest-filters.is-open .filter-more { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 .result-bar { display: flex; justify-content: space-between; align-items: center; gap: var(--s3); margin-block: var(--s5) var(--s6); }
-.result-count { font-family: var(--font-num); color: var(--ink-2); font-size: 0.8125rem; }
+.result-count { font-family: var(--font-body); color: var(--ink-2); font-size: 0.8125rem; }
 
 /* ---------- one destination: a travel-guide page ---------- */
 .crumbs ol { display: flex; flex-wrap: wrap; gap: 4px; font-size: 0.8125rem; color: var(--ink-2); margin-bottom: var(--s5); }
@@ -256,7 +256,7 @@ textarea.input { resize: vertical; min-height: 88px; }
 .dest-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s4) var(--s5); }
 .dest-facts div { display: grid; gap: 2px; min-width: 0; }
 .dest-facts dt { font-size: 0.75rem; color: var(--ink-2); }
-.dest-facts dd { font-family: var(--font-num); font-size: 0.9375rem; font-weight: 500; }
+.dest-facts dd { font-family: var(--font-body); font-size: 0.9375rem; font-weight: 500; }
 .dest-actions { display: flex; flex-wrap: wrap; gap: var(--s2); }
 .dest-note { font-size: 0.8125rem; }
 @media (min-width: 900px) {
@@ -267,7 +267,7 @@ textarea.input { resize: vertical; min-height: 88px; }
 }
 /* when to go: twelve months, each on its state tint (best / fine / very hot / snow) */
 .season-strip { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 4px; }
-.season-strip li { display: grid; gap: 6px; padding: 5px 0 6px; border-radius: 3px; font-family: var(--font-num); font-size: 0.6875rem; text-transform: uppercase; }
+.season-strip li { display: grid; gap: 6px; padding: 5px 0 6px; border-radius: 3px; font-family: var(--font-body); font-size: 0.6875rem; text-transform: uppercase; }
 .season-strip li::before { content: ""; height: 6px; margin-inline: 5px; border-radius: 2px; background: currentColor; }
 .season-strip li > span:first-child { text-align: center; }
 .season-strip .season-best { background: var(--m-best-bg); color: var(--m-best); }
@@ -314,14 +314,14 @@ textarea.input { resize: vertical; min-height: 88px; }
 .stop { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s2) var(--s3); align-items: end; padding: var(--s3) 0 var(--s4) 36px; }
 .stop + .stop { border-top: 1px solid var(--line); }
 .stop-head { grid-column: 1 / -1; display: flex; gap: var(--s2); align-items: center; }
-.stop-num { position: absolute; left: 0; top: 12px; display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--lapis-soft); border: 2px solid var(--turq); color: var(--ink); font-family: var(--font-num); font-size: 0.75rem; }
+.stop-num { position: absolute; left: 0; top: 12px; display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--lapis-soft); border: 2px solid var(--turq); color: var(--ink); font-family: var(--font-body); font-size: 0.75rem; }
 .stop:first-child .stop-num, .stop:last-child .stop-num { background: var(--pom); border-color: var(--pom); color: var(--on-pom); }
 .stop-name { font-family: var(--font-head); font-size: 1.0625rem; font-weight: 800; color: var(--ink); text-decoration: none; }
 .stop-name:hover { text-decoration: underline; }
 .stop-tools { display: flex; gap: 4px; }
 .stop-tools .icon-btn:disabled, .stepper .icon-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 .stepper-row { display: flex; gap: 6px; align-items: center; }
-.stepper-input { width: 64px; text-align: center; font-family: var(--font-num); }
+.stepper-input { width: 64px; text-align: center; font-family: var(--font-body); }
 .add-stop { display: flex; gap: var(--s2); }
 .add-stop .select { flex: 1; min-width: 0; }
 .plan-result { display: grid; gap: var(--s8); min-width: 0; }
@@ -332,8 +332,8 @@ textarea.input { resize: vertical; min-height: 88px; }
 @media (min-width: 1024px) { .plan-summary { position: sticky; top: calc(var(--header-h) + var(--s4)); z-index: 3; box-shadow: 0 20px 36px -30px rgba(var(--shadow-ink), 0.5); } }
 .plan-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); }
 .plan-total { font-size: clamp(2rem, 6vw, 2.75rem); font-weight: 500; line-height: 1.05; color: var(--ink); }
-.plan-per { font-family: var(--font-num); font-size: 0.875rem; color: var(--ink); }
-.plan-line { font-family: var(--font-num); font-size: 0.8125rem; color: var(--ink-2); }
+.plan-per { font-family: var(--font-body); font-size: 0.875rem; color: var(--ink); }
+.plan-line { font-family: var(--font-body); font-size: 0.8125rem; color: var(--ink-2); }
 .warn-list { display: grid; gap: var(--s3); }
 .warn { display: flex; gap: var(--s3); align-items: flex-start; padding: var(--s2) var(--s3); border-radius: var(--r-ctl); background: var(--warn-soft); color: var(--warn); font-size: 0.9375rem; }
 .warn .icon { flex: none; margin-top: 3px; color: var(--warn); }
@@ -347,7 +347,7 @@ textarea.input { resize: vertical; min-height: 88px; }
 .leg { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 2px var(--s3); align-items: center; padding: 10px 0; border-top: 1px solid var(--line); }
 .leg > .icon { color: var(--turq); grid-row: span 2; }
 .leg-cities { font-weight: 600; }
-.leg-meta { grid-column: 2; font-family: var(--font-num); color: var(--ink-2); font-size: 0.78rem; }
+.leg-meta { grid-column: 2; font-family: var(--font-body); color: var(--ink-2); font-size: 0.78rem; }
 .leg-price { grid-column: 3; grid-row: 1 / span 2; font-family: var(--font-num); font-weight: 500; text-align: right; }
 /* day by day: a timeline on the route line */
 .day-list { position: relative; display: grid; }
@@ -356,8 +356,8 @@ textarea.input { resize: vertical; min-height: 88px; }
 .day::before { content: ""; position: absolute; left: 0; top: 18px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 2px solid var(--turq); }
 .day:first-child::before, .day.is-last::before { background: var(--pom); border-color: var(--pom); }
 .day h4 { font-size: 1rem; display: flex; flex-wrap: wrap; gap: 0 6px; align-items: baseline; }
-.day-n { font-family: var(--font-num); font-size: 0.8125rem; font-weight: 500; color: var(--pom); text-transform: uppercase; }
-.day-date { font-family: var(--font-num); color: var(--ink-2); font-size: 0.8125rem; font-weight: 400; }
+.day-n { font-family: var(--font-body); font-size: 0.8125rem; font-weight: 500; color: var(--pom); text-transform: uppercase; }
+.day-date { font-family: var(--font-body); color: var(--ink-2); font-size: 0.8125rem; font-weight: 400; }
 .day-city { font-family: var(--font-head); font-weight: 800; }
 .day-travel { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; font-size: 0.875rem; color: var(--turq); }
 .day-sights { display: flex; flex-wrap: wrap; gap: 4px var(--s4); }
@@ -497,3 +497,31 @@ textarea.input { resize: vertical; min-height: 88px; }
 @media (min-width: 760px) { .dest-page section[aria-labelledby="sightTitle"] { padding: var(--s8) var(--s8) var(--s10); } }
 /* very hot months: the amber bar, like the legend */
 .season-strip .season-heat::before { background: var(--amber); }
+
+/* ---------- warmer type (2026-11-23): the number font only for prices ----------
+   IBM Plex Mono stays on prices, totals and booking codes; facts, times and
+   dates are set in Inter, and the big numerals in Manrope. */
+.tour-length, .qp-summary, .way-total { font-family: var(--font-body); letter-spacing: 0; }
+.how-n, .sight-n, .plan-sec-n { font-family: var(--font-head); font-weight: 800; letter-spacing: -0.02em; }
+.dest-facts div:nth-child(3) dd { font-family: var(--font-num); }
+.place-facts { font-size: 0.8125rem; }
+.tour-length { text-transform: none; letter-spacing: 0; font-weight: 600; }
+.day-n { text-transform: none; font-weight: 700; }
+
+/* ---------- local tips: a friend's advice, on an amber edge ---------- */
+.place-tip { font-size: 0.875rem; color: var(--ink); max-width: 52ch; padding-left: var(--s3); border-left: 3px solid var(--amber); }
+.tip-label { font-weight: 700; color: var(--turq); }
+.place-small .place-tip, .spread .place:not(.place-wide) .place-tip { display: none; }
+.dest-tip { max-width: 46ch; margin-top: var(--s2); padding: var(--s3) var(--s4); border-left: 3px solid var(--amber); border-radius: 0 var(--r-ctl) var(--r-ctl) 0; background: var(--sand); font-size: 1rem; color: var(--ink); }
+
+/* ---------- less blue: lapis is kept for the one main action per page,
+   the hero column, the planner total, the route line and the active menu item ---------- */
+.header-plan { background: transparent; color: var(--lapis); border-color: var(--lapis); }
+.header-plan:hover { background: var(--lapis-soft); border-color: var(--lapis); color: var(--lapis); }
+.more-link, .link-arrow, .more-link:hover, .link-arrow:hover { color: var(--turq); }
+.chip-radio:has(input:checked) { background: var(--lapis-soft); border-color: var(--lapis); color: var(--ink); }
+.chip-radio:has(input:checked):hover { border-color: var(--lapis-hover); }
+.seg button[aria-pressed="true"] { background: var(--lapis-soft); color: var(--lapis); }
+.saved-plan h3 a { color: var(--ink); }
+/* the hero's second action keeps the hero text colour (the turquoise link rule must not reach it) */
+.hero .link-light, .hero .link-light:hover { color: var(--hero-ink); }

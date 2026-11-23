@@ -170,6 +170,7 @@
         el("p", { class: "place-meta", text: t("region." + c.region) }),
         el("h3", { class: "place-name" }, el("a", { href: "destination.html?id=" + c.id, text: c.name[lang()] })),
         el("p", { class: "place-about", text: c.about[lang()] }),
+        c.tip ? el("p", { class: "place-tip" }, el("span", { class: "tip-label", text: t("tip.label") }), " ", c.tip[lang()]) : "",
         el("ul", { class: "place-facts" },
           el("li", null, icon("clock", 15), el("span", { text: wayLine(c) })),
           el("li", null, icon("calendar", 15), el("span", { text: t("city.best", { months: monthRange(c.best) }) })),

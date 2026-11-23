@@ -103,6 +103,7 @@ window.I18N = {
     "plan.sec2": "Who and where",
     "plan.sec3": "When",
     "plan.sec4": "Stay and travel",
+    "tip.label": "Our tip:",
   },
 
   ru: {
@@ -207,6 +208,7 @@ window.I18N = {
     "plan.sec2": "Кто и откуда",
     "plan.sec3": "Когда",
     "plan.sec4": "Жильё и дорога",
+    "tip.label": "Наш совет:",
   },
 
   uz: {
@@ -312,5 +314,6 @@ window.I18N = {
     "plan.sec2": "Kim va qayerdan",
     "plan.sec3": "Qachon",
     "plan.sec4": "Turar joy va yo'l",
+    "tip.label": "Bizning maslahat:",
   },
 };
