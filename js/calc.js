@@ -253,7 +253,7 @@
   }
   function tripFromQuery(search) {
     const p = new URLSearchParams(search);
-    if (p.get("tour") && D.tour(p.get("tour"))) return tourTrip(D.tour(p.get("tour")));
+    if (p.get("tour") && D.tour(p.get("tour"))) return tourTrip(D.tour(p.get("tour")), { month: new Date().getMonth() + 1 }); // same month as the tour cards
     if (!p.get("stops") && !p.get("add")) return null;
     const stops = (p.get("stops") || "").split(",").filter(Boolean).map((x) => { const [city, nights] = x.split("-"); return { city, nights: Number(nights) }; });
     if (p.get("add") && D.city(p.get("add"))) stops.push({ city: p.get("add"), nights: D.city(p.get("add")).minNights });
