@@ -543,3 +543,10 @@ textarea.input { resize: vertical; min-height: 88px; }
   /* 12 month cells are too narrow for Russian labels here: two rows of six */
   .season-strip { grid-template-columns: repeat(6, minmax(0, 1fr)); }
 }
+
+/* hero title sized by its column, not the window: the longest words
+   ("Спланируйте", "rejalashtiring.") are about 6.6em wide in Manrope 800,
+   so 14.5% of the column keeps every word on one line in all 3 languages */
+.hero-inner { container-type: inline-size; grid-template-columns: minmax(0, 1fr); }
+.hero-title { font-size: min(clamp(2.25rem, 10vw, 3.25rem), 14.5cqi); overflow-wrap: break-word; }
+@media (min-width: 960px) { .hero-title { font-size: min(clamp(3rem, 5vw, 4.75rem), 14.5cqi); } }
