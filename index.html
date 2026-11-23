@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sayohat</title>
+  <meta name="description" content="">
+  <meta name="theme-color" content="#f6f5f1">
+  <!-- Apply the saved theme before the page is drawn, so it never flashes. -->
+  <script>
+    window.APP_NS = "travel";
+    try {
+      var savedTheme = localStorage.getItem("travel:theme");
+      document.documentElement.setAttribute("data-theme", savedTheme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/site.css">
+  <script defer src="js/core.js"></script>
+  <script defer src="js/lang.js"></script>
+  <script defer src="js/data.js"></script>
+  <script defer src="js/calc.js"></script>
+  <script defer src="js/store.js"></script>
+  <script defer src="js/photos.js"></script>
+  <script defer src="js/layout.js"></script>
+  <script defer src="js/pages/home.js"></script>
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+  <header id="site-header" class="site-header"></header>
+
+  <main id="main" tabindex="-1" class="container page home-page">
+    <section class="hero" aria-labelledby="homeTitle">
+      <div class="hero-text">
+        <p class="eyebrow" data-i18n="home.eyebrow"></p>
+        <h1 id="homeTitle" data-i18n="home.title"></h1>
+        <p class="lead" data-i18n="home.intro"></p>
+      </div>
+      <form id="quickPlan" class="quick-plan" novalidate aria-labelledby="qpTitle">
+        <h2 id="qpTitle" data-i18n="home.qpTitle"></h2>
+        <fieldset class="choice"><legend data-i18n="home.qpWhere"></legend><div id="qpCities" class="chip-row"></div></fieldset>
+        <div class="qp-row">
+          <div class="field"><label for="qpMonth" data-i18n="home.qpMonth"></label><select id="qpMonth" class="select"></select></div>
+          <div class="field"><label for="qpPeople" data-i18n="home.qpPeople"></label><select id="qpPeople" class="select"></select></div>
+        </div>
+        <p id="qpSummary" class="hint" aria-live="polite"></p>
+        <p id="qpError" class="field-error" role="alert"></p>
+        <button type="submit" class="btn" data-i18n="home.qpGo"></button>
+      </form>
+    </section>
+    <section class="section" aria-labelledby="seasonTitle">
+      <div class="section-head"><h2 id="seasonTitle"></h2><a class="more-link" id="seasonMore" href="destinations.html" data-i18n="home.seasonAll"></a></div>
+      <div id="seasonList" class="card-grid"></div>
+    </section>
+    <section class="section" aria-labelledby="toursTitle">
+      <h2 id="toursTitle" data-i18n="home.toursTitle"></h2>
+      <p class="lead" data-i18n="home.toursIntro"></p>
+      <div id="tourList" class="tour-grid"></div>
+    </section>
+    <section class="section" aria-labelledby="howTitle">
+      <h2 id="howTitle" data-i18n="home.howTitle"></h2>
+      <ol id="howList" class="how-list"></ol>
+    </section>
+    <section class="section" id="recentSection" aria-labelledby="recentTitle" hidden>
+      <h2 id="recentTitle" data-i18n="home.recent"></h2>
+      <div id="recentList" class="card-grid"></div>
+    </section>
+  </main>
+  <footer id="site-footer" class="site-footer"></footer>
+  <div id="toasts" class="toast-host" aria-live="polite"></div>
+</body>
+</html>

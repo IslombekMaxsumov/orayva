@@ -1,0 +1,154 @@
+// Writes the 6 HTML pages from one template, so the head, header and footer
+// are the same everywhere. Run:  node tools/pages.mjs
+// (The header, menu and footer are filled in by js/layout.js.)
+import { writeFileSync } from "node:fs";
+
+const head = (page) => `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sayohat</title>
+  <meta name="description" content="">
+  <meta name="theme-color" content="#f6f5f1">
+  <!-- Apply the saved theme before the page is drawn, so it never flashes. -->
+  <script>
+    window.APP_NS = "travel";
+    try {
+      var savedTheme = localStorage.getItem("travel:theme");
+      document.documentElement.setAttribute("data-theme", savedTheme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/site.css">
+  <script defer src="js/core.js"></script>
+  <script defer src="js/lang.js"></script>
+  <script defer src="js/data.js"></script>
+  <script defer src="js/calc.js"></script>
+  <script defer src="js/store.js"></script>
+  <script defer src="js/photos.js"></script>
+  <script defer src="js/layout.js"></script>
+  <script defer src="js/pages/${page}.js"></script>
+</head>
+<body data-page="${page}">
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+  <header id="site-header" class="site-header"></header>
+`;
+const foot = `
+  <footer id="site-footer" class="site-footer"></footer>
+  <div id="toasts" class="toast-host" aria-live="polite"></div>
+</body>
+</html>
+`;
+
+const PAGES = {
+  index: ["home", `
+  <main id="main" tabindex="-1" class="container page home-page">
+    <section class="hero" aria-labelledby="homeTitle">
+      <div class="hero-text">
+        <p class="eyebrow" data-i18n="home.eyebrow"></p>
+        <h1 id="homeTitle" data-i18n="home.title"></h1>
+        <p class="lead" data-i18n="home.intro"></p>
+      </div>
+      <form id="quickPlan" class="quick-plan" novalidate aria-labelledby="qpTitle">
+        <h2 id="qpTitle" data-i18n="home.qpTitle"></h2>
+        <fieldset class="choice"><legend data-i18n="home.qpWhere"></legend><div id="qpCities" class="chip-row"></div></fieldset>
+        <div class="qp-row">
+          <div class="field"><label for="qpMonth" data-i18n="home.qpMonth"></label><select id="qpMonth" class="select"></select></div>
+          <div class="field"><label for="qpPeople" data-i18n="home.qpPeople"></label><select id="qpPeople" class="select"></select></div>
+        </div>
+        <p id="qpSummary" class="hint" aria-live="polite"></p>
+        <p id="qpError" class="field-error" role="alert"></p>
+        <button type="submit" class="btn" data-i18n="home.qpGo"></button>
+      </form>
+    </section>
+    <section class="section" aria-labelledby="seasonTitle">
+      <div class="section-head"><h2 id="seasonTitle"></h2><a class="more-link" id="seasonMore" href="destinations.html" data-i18n="home.seasonAll"></a></div>
+      <div id="seasonList" class="card-grid"></div>
+    </section>
+    <section class="section" aria-labelledby="toursTitle">
+      <h2 id="toursTitle" data-i18n="home.toursTitle"></h2>
+      <p class="lead" data-i18n="home.toursIntro"></p>
+      <div id="tourList" class="tour-grid"></div>
+    </section>
+    <section class="section" aria-labelledby="howTitle">
+      <h2 id="howTitle" data-i18n="home.howTitle"></h2>
+      <ol id="howList" class="how-list"></ol>
+    </section>
+    <section class="section" id="recentSection" aria-labelledby="recentTitle" hidden>
+      <h2 id="recentTitle" data-i18n="home.recent"></h2>
+      <div id="recentList" class="card-grid"></div>
+    </section>
+  </main>`],
+
+  destinations: ["destinations", `
+  <main id="main" tabindex="-1" class="container page">
+    <h1 class="page-title" data-i18n="page.destinations"></h1>
+    <p class="lead" data-i18n="dest.intro"></p>
+    <form id="filters" class="dest-filters" novalidate role="search" aria-labelledby="filterTitle">
+      <h2 id="filterTitle" class="visually-hidden" data-i18n="filter.title"></h2>
+      <div class="field filter-search"><label for="q" data-i18n="filter.search"></label><input id="q" class="input" type="search" autocomplete="off" maxlength="60" data-i18n-placeholder="filter.searchPlaceholder"></div>
+      <div class="field"><label for="region" data-i18n="filter.region"></label><select id="region" class="select"></select></div>
+      <div class="field"><label for="month" data-i18n="filter.month"></label><select id="month" class="select"></select></div>
+      <div class="field"><label for="maxHours" data-i18n="filter.maxHours"></label><select id="maxHours" class="select"></select></div>
+      <div class="field"><label for="sort" data-i18n="filter.sort"></label><select id="sort" class="select"></select></div>
+      <fieldset class="choice filter-types"><legend data-i18n="filter.type"></legend><div id="typeChips" class="chip-row"></div></fieldset>
+    </form>
+    <div class="result-bar"><p id="count" class="result-count" aria-live="polite"></p><button type="button" id="reset" class="btn btn-ghost btn-small" data-i18n="filter.reset"></button></div>
+    <div id="list" class="card-grid"></div>
+    <div id="empty" class="empty" hidden>
+      <h2 data-i18n="filter.emptyTitle"></h2>
+      <p data-i18n="filter.emptyText"></p>
+      <button type="button" id="reset2" class="btn" data-i18n="filter.reset"></button>
+    </div>
+  </main>`],
+
+  destination: ["destination", `
+  <main id="main" tabindex="-1" class="container page dest-page">
+    <nav class="crumbs" id="crumbs" data-i18n-aria="crumb.label"></nav>
+    <div id="view"></div>
+  </main>`],
+
+  planner: ["planner", `
+  <main id="main" tabindex="-1" class="container page">
+    <h1 class="page-title" data-i18n="page.planner"></h1>
+    <p class="lead" data-i18n="plan.intro"></p>
+    <div class="planner-layout">
+      <form id="planForm" class="plan-form" novalidate aria-labelledby="planFormTitle">
+        <h2 id="planFormTitle" class="visually-hidden" data-i18n="plan.formTitle"></h2>
+        <div id="planFields"></div>
+      </form>
+      <section class="plan-result" aria-labelledby="planResultTitle">
+        <h2 id="planResultTitle" data-i18n="plan.resultTitle"></h2>
+        <div id="planSummary" class="plan-summary" aria-live="polite"></div>
+        <div id="planWarnings"></div>
+        <div id="planPrice"></div>
+        <div id="planRoute"></div>
+        <div id="planDays"></div>
+        <div id="planActions" class="plan-actions"></div>
+      </section>
+    </div>
+  </main>`],
+
+  booking: ["booking", `
+  <main id="main" tabindex="-1" class="container page">
+    <h1 class="page-title" data-i18n="page.booking"></h1>
+    <p class="lead" data-i18n="book.intro"></p>
+    <div id="bookView"></div>
+  </main>`],
+
+  trips: ["trips", `
+  <main id="main" tabindex="-1" class="container page">
+    <h1 class="page-title" data-i18n="page.trips"></h1>
+    <nav class="jump-links" data-i18n-aria="trips.jump"><a href="#bookings" data-i18n="trips.bookings"></a><a href="#plans" data-i18n="trips.plans"></a><a href="#saved" data-i18n="trips.saved"></a><a href="#recent" data-i18n="trips.recent"></a></nav>
+    <section id="bookings" class="section" aria-labelledby="bookingsTitle"><h2 id="bookingsTitle" data-i18n="trips.bookings"></h2><div id="bookingList"></div></section>
+    <section id="plans" class="section" aria-labelledby="plansTitle"><h2 id="plansTitle" data-i18n="trips.plans"></h2><div id="planList"></div></section>
+    <section id="saved" class="section" aria-labelledby="savedTitle"><h2 id="savedTitle" data-i18n="trips.saved"></h2><div id="savedList"></div></section>
+    <section id="recent" class="section" aria-labelledby="recentTitle"><h2 id="recentTitle" data-i18n="trips.recent"></h2><div id="recentList"></div></section>
+  </main>`],
+};
+
+for (const [file, [page, main]] of Object.entries(PAGES)) {
+  writeFileSync(new URL(`../${file}.html`, import.meta.url), head(page) + main + foot);
+}
+console.log("wrote", Object.keys(PAGES).length, "pages");

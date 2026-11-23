@@ -1,0 +1,207 @@
+/* ==========================================================
+   Travel site base: tokens, reset, type, buttons, form fields, chips,
+   sliders, switches, badges, tables, toast (components from site #7).
+   ========================================================== */
+
+/* PLACEHOLDER LOOK: plain neutral greys and system fonts, only so the pages
+   are usable while the logic is built. The real palette, fonts and shapes
+   come from the design brief (do not style before it arrives). */
+:root,
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f6f5f1; --surface: #ffffff; --raised: #ebe9e3; --elevated: #ffffff;
+  --ink: #1f2124; --ink-2: #5c5f66; --ink-3: #a3a5aa;
+  --line: #dcdad4; --line-strong: #8a8c90;
+  --accent: #3d5a80; --accent-text: #3d5a80; --btn: #3d5a80; --btn-hover: #2f4767; --on-btn: #ffffff;
+  --soft: #e7ecf3; --ok: #2f7a4f; --warn: #94601f; --danger: #b2433e;
+  --chart: #3d5a80; --meter: #2f7a4f; --plate: #e4e2dc;
+  --field: #ffffff; --band: #ffffff;
+  --toast-bg: #1f2124; --toast-ink: #f6f5f1; --toast-action: #b9c9e0; --focus: #1f2124;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #16181c; --surface: #1e2025; --raised: #282a30; --elevated: #30333a;
+  --ink: #eeedea; --ink-2: #a9abb0; --ink-3: #6f7278;
+  --line: #34373d; --line-strong: #75787e;
+  --accent: #8fb0d9; --accent-text: #9fbce0; --btn: #8fb0d9; --btn-hover: #a7c2e3; --on-btn: #16181c;
+  --soft: #263040; --ok: #7cbf94; --warn: #d6a764; --danger: #e08a84;
+  --chart: #8fb0d9; --meter: #7cbf94; --plate: #1e2025;
+  --field: #1e2025; --band: #1e2025;
+  --toast-bg: #30333a; --toast-ink: #eeedea; --toast-action: #a7c2e3; --focus: #eeedea;
+}
+
+:root {
+  --font-head: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --r-ctl: 8px;              /* ordinary controls: 6–10px */
+  --r-panel: 12px;           /* larger panels */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 20px; --s6: 24px; --s8: 32px; --s10: 40px; --s12: 48px; --s16: 64px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --fast: 160ms;
+  --wide: 1240px;
+}
+
+/* ---------- reset and type ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, p, figure, dl, dd { margin: 0; }
+h1, h2, h3 { font-family: var(--font-head); font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+legend { padding: 0; }
+img, svg { display: block; }
+[hidden] { display: none !important; } /* class display rules (e.g. .empty { display: grid }) must not undo hidden */
+a { color: var(--accent-text); text-underline-offset: 3px; }
+a:hover { color: var(--ink); }
+/* every number that people compare lines up */
+.num, output, td, .price, .pay-big { font-variant-numeric: tabular-nums; }
+
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.container { width: min(100% - 32px, var(--wide)); margin-inline: auto; }
+.hint { color: var(--ink-2); font-size: 0.8125rem; }
+.eyebrow, .label { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+
+/* ---------- buttons: rectangular, solid accent primary ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; padding: 0 18px;
+  border: 1px solid var(--btn); border-radius: var(--r-ctl);
+  background: var(--btn); color: var(--on-btn);
+  font-weight: 600; font-size: 0.9375rem; text-decoration: none; white-space: nowrap;
+  transition: background-color var(--fast) var(--ease), border-color var(--fast) var(--ease), color var(--fast) var(--ease);
+}
+.btn:hover { background: var(--btn-hover); border-color: var(--btn-hover); color: var(--on-btn); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn .icon { flex: none; }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+.btn-ghost:hover { background: var(--raised); border-color: var(--ink-2); color: var(--ink); }
+.btn-danger-ghost { background: transparent; color: var(--danger); border-color: var(--line-strong); }
+.btn-danger-ghost:hover { background: transparent; border-color: var(--danger); color: var(--danger); }
+.btn-small { min-height: 36px; padding: 0 12px; font-size: 0.8125rem; }
+.icon-btn {
+  display: inline-grid; place-items: center; width: 40px; height: 40px; flex: none;
+  border: 1px solid var(--line); border-radius: var(--r-ctl);
+  background: transparent; color: var(--ink);
+  transition: border-color var(--fast) var(--ease), background-color var(--fast) var(--ease);
+}
+.icon-btn:hover { border-color: var(--line-strong); background: var(--raised); }
+
+/* language switch */
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: var(--r-ctl); padding: 2px; }
+.seg button { border: 0; background: none; padding: 6px 9px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; color: var(--ink-2); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+
+/* ---------- form fields: 44–48px, clear labels ---------- */
+.field { display: grid; gap: 6px; min-width: 0; }
+.field > label, .field-label, legend { font-size: 0.8125rem; font-weight: 500; color: var(--ink); }
+.input, .select {
+  width: 100%; min-height: 46px; padding: 10px 12px;
+  background: var(--field); color: var(--ink);
+  border: 1px solid var(--line-strong); border-radius: var(--r-ctl);
+  transition: border-color var(--fast) var(--ease), box-shadow var(--fast) var(--ease);
+}
+.select { appearance: none; padding-right: 36px; background-image: linear-gradient(45deg, transparent 50%, var(--ink-2) 50%), linear-gradient(135deg, var(--ink-2) 50%, transparent 50%); background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%; background-size: 5px 5px; background-repeat: no-repeat; }
+.input::placeholder { color: var(--ink-2); }
+.input:hover, .select:hover { border-color: var(--ink-2); }
+.input:focus-visible, .select:focus-visible { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--soft); }
+.input[aria-invalid="true"] { border-color: var(--danger); }
+.field-error { font-size: 0.8125rem; color: var(--danger); font-weight: 500; }
+.field-error:empty { display: none; }
+input[type="number"] { font-variant-numeric: tabular-nums; }
+
+/* ---------- chips: compact and understated, a tint instead of an outline ---------- */
+.chip-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.chip {
+  position: relative; display: inline-flex; align-items: center; gap: 6px;
+  min-height: 34px; padding: 0 12px;
+  border: 1px solid transparent; border-radius: 6px; background: var(--raised);
+  font-size: 0.8125rem; font-weight: 500; color: var(--ink); cursor: pointer;
+  transition: border-color var(--fast) var(--ease), background-color var(--fast) var(--ease);
+}
+.chip:hover { border-color: var(--line-strong); }
+.chip-radio:has(input:checked):hover { border-color: var(--ink); }
+.chip-radio input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+.chip-radio:has(input:checked) { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.chip-radio:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
+.chip.is-disabled { opacity: 0.4; cursor: not-allowed; }
+.chip-active { background: var(--soft); border-color: transparent; }
+.chip-active .icon { color: var(--ink-2); }
+
+/* ---------- sliders: big thumb, filled track, value and range shown ---------- */
+.slider-field { gap: 4px; }
+.slider-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.slider-value { font-family: var(--font-head); font-weight: 700; font-size: 0.9375rem; white-space: nowrap; }
+.slider-range { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.slider {
+  --pct: 50%;
+  appearance: none; width: 100%; height: 32px; margin: 0; background: transparent; cursor: pointer;
+}
+.slider::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: linear-gradient(to right, var(--accent) var(--pct), var(--raised) var(--pct)); }
+.slider::-moz-range-track { height: 6px; border-radius: 3px; background: var(--raised); }
+.slider::-moz-range-progress { height: 6px; border-radius: 3px; background: var(--accent); }
+.slider::-webkit-slider-thumb { appearance: none; width: 24px; height: 24px; margin-top: -9px; border-radius: 50%; background: var(--surface); border: 2px solid var(--ink); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); }
+.slider::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--surface); border: 2px solid var(--ink); }
+.slider:focus-visible { outline: none; }
+.slider:focus-visible::-webkit-slider-thumb { outline: 2px solid var(--focus); outline-offset: 3px; }
+.slider:focus-visible::-moz-range-thumb { outline: 2px solid var(--focus); outline-offset: 3px; }
+
+/* ---------- switches: compact, obvious on/off ---------- */
+.switch { display: flex; align-items: center; gap: 12px; cursor: pointer; font-size: 0.875rem; min-height: 32px; }
+.switch input {
+  appearance: none; flex: none; width: 40px; height: 24px; margin: 0; border-radius: 12px;
+  background: var(--raised); border: 1px solid var(--line-strong); position: relative; cursor: pointer;
+  transition: background-color var(--fast) var(--ease), border-color var(--fast) var(--ease);
+}
+.switch input::after {
+  content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--ink-2); transition: transform var(--fast) var(--ease), background-color var(--fast) var(--ease);
+}
+.switch input:checked { background: var(--ink); border-color: var(--ink); }
+.switch input:checked::after { transform: translateX(16px); background: var(--bg); }
+.switch input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* ---------- badges ---------- */
+.badges { display: flex; flex-wrap: wrap; gap: 4px; }
+.badge { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.03em; background: var(--surface); color: var(--ink); }
+.badge-new { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+/* ---------- tables: horizontal separators ---------- */
+.table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+.table th, .table td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.table thead th { font-weight: 500; color: var(--ink-2); font-size: 0.8125rem; }
+.table tbody th { font-weight: 500; }
+
+/* ---------- toast ---------- */
+.toast-host { position: fixed; inset: auto 0 calc(var(--tabbar-h, 0px) + 16px) 0; display: grid; justify-items: center; padding-inline: 16px; pointer-events: none; z-index: 60; }
+.toast {
+  display: inline-flex; align-items: center; gap: 16px; max-width: 520px;
+  padding: 10px 10px 10px 16px; border-radius: var(--r-ctl);
+  background: var(--toast-bg); color: var(--toast-ink); font-size: 0.875rem;
+  pointer-events: auto; animation: toast-in 0.2s var(--ease);
+}
+.toast.is-leaving { animation: toast-out 0.2s var(--ease) forwards; }
+.toast button { background: none; border: 0; padding: 6px 8px; font-weight: 700; color: var(--toast-action); border-radius: 6px; }
+@keyframes toast-in { from { opacity: 0; transform: translateY(8px); } }
+@keyframes toast-out { to { opacity: 0; transform: translateY(8px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}

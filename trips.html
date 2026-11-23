@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sayohat</title>
+  <meta name="description" content="">
+  <meta name="theme-color" content="#f6f5f1">
+  <!-- Apply the saved theme before the page is drawn, so it never flashes. -->
+  <script>
+    window.APP_NS = "travel";
+    try {
+      var savedTheme = localStorage.getItem("travel:theme");
+      document.documentElement.setAttribute("data-theme", savedTheme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/site.css">
+  <script defer src="js/core.js"></script>
+  <script defer src="js/lang.js"></script>
+  <script defer src="js/data.js"></script>
+  <script defer src="js/calc.js"></script>
+  <script defer src="js/store.js"></script>
+  <script defer src="js/photos.js"></script>
+  <script defer src="js/layout.js"></script>
+  <script defer src="js/pages/trips.js"></script>
+</head>
+<body data-page="trips">
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+  <header id="site-header" class="site-header"></header>
+
+  <main id="main" tabindex="-1" class="container page">
+    <h1 class="page-title" data-i18n="page.trips"></h1>
+    <nav class="jump-links" data-i18n-aria="trips.jump"><a href="#bookings" data-i18n="trips.bookings"></a><a href="#plans" data-i18n="trips.plans"></a><a href="#saved" data-i18n="trips.saved"></a><a href="#recent" data-i18n="trips.recent"></a></nav>
+    <section id="bookings" class="section" aria-labelledby="bookingsTitle"><h2 id="bookingsTitle" data-i18n="trips.bookings"></h2><div id="bookingList"></div></section>
+    <section id="plans" class="section" aria-labelledby="plansTitle"><h2 id="plansTitle" data-i18n="trips.plans"></h2><div id="planList"></div></section>
+    <section id="saved" class="section" aria-labelledby="savedTitle"><h2 id="savedTitle" data-i18n="trips.saved"></h2><div id="savedList"></div></section>
+    <section id="recent" class="section" aria-labelledby="recentTitle"><h2 id="recentTitle" data-i18n="trips.recent"></h2><div id="recentList"></div></section>
+  </main>
+  <footer id="site-footer" class="site-footer"></footer>
+  <div id="toasts" class="toast-host" aria-live="polite"></div>
+</body>
+</html>
