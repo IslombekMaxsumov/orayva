@@ -550,3 +550,14 @@ textarea.input { resize: vertical; min-height: 88px; }
 .hero-inner { container-type: inline-size; grid-template-columns: minmax(0, 1fr); }
 .hero-title { font-size: min(clamp(2.25rem, 10vw, 3.25rem), 14.5cqi); overflow-wrap: break-word; }
 @media (min-width: 960px) { .hero-title { font-size: min(clamp(3rem, 5vw, 4.75rem), 14.5cqi); } }
+
+/* planner stops: the nights stepper (156px) and the move/remove buttons (128px)
+   share one line only when they fit; on small phones the buttons wrap below
+   instead of overlapping the "+" button */
+.stop { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; }
+.stop-head { flex: 1 0 100%; }
+.stop .stepper { flex: 0 0 auto; }
+.stop-tools { margin-left: auto; }
+
+/* month strip: twelve cells need about 412px; below that, two rows of six */
+@media (max-width: 479px) { .season-strip { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
