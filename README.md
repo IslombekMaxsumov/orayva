@@ -1,5 +1,7 @@
 # ORAYVA: trips around Uzbekistan
 
+**Live site: https://islombekmaxsumov.github.io/orayva/**
+
 Site #8 of my 10-websites course project: a travel agency for trips around Uzbekistan, in Uzbek, Russian and English, with prices in so'm or US dollars. Plain HTML, CSS and JavaScript: no framework, no build step, no backend. Everything you save stays in your browser.
 
 The rule for this site: the tools must do real work, not just "click this, click that".
